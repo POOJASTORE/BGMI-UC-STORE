@@ -14,11 +14,9 @@
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
-
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -37,23 +35,15 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-
     height: 65px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     padding: 0 18px;
-
     background: #140b21;
-
     border-bottom: 1px solid #3b1d59;
-
-    box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
-
 
 .logo {
     font-size: 20px;
@@ -61,28 +51,20 @@ body {
     color: #ffffff;
 }
 
-
 .logo span {
     color: #b85cff;
 }
 
-
 .profile-btn {
     width: 42px;
     height: 42px;
-
     border: none;
     border-radius: 50%;
-
     background: #7b2cff;
-
     color: white;
-
     font-size: 20px;
-
     cursor: pointer;
 }
-
 
 .profile-btn:active {
     transform: scale(0.95);
@@ -96,9 +78,7 @@ body {
 main {
     width: 100%;
     max-width: 900px;
-
     margin: auto;
-
     padding: 20px 15px;
 }
 
@@ -109,15 +89,12 @@ main {
 
 .page {
     display: none;
-
     animation: fadeIn 0.25s ease;
 }
-
 
 .page.active {
     display: block;
 }
-
 
 @keyframes fadeIn {
 
@@ -143,16 +120,12 @@ h1 {
     margin-bottom: 10px;
 }
 
-
 h2 {
     font-size: 22px;
-
     margin-top: 28px;
     margin-bottom: 15px;
-
     color: #ffffff;
 }
-
 
 h3 {
     margin-bottom: 10px;
@@ -160,18 +133,38 @@ h3 {
 
 
 /* ===============================
-   BANNER
+   HOME BANNER
+   PHOTO: home-banner.png
 =============================== */
 
 .banner {
 
-    background:
+    position: relative;
+
+    overflow: hidden;
+
+    background-image:
         linear-gradient(
-            135deg,
-            #291044,
-            #641bb1,
-            #35105b
-        );
+            rgba(10, 5, 18, 0.45),
+            rgba(25, 5, 45, 0.70)
+        ),
+        url("home-banner.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    min-height: 300px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
 
     border: 1px solid #8b3dce;
 
@@ -184,19 +177,37 @@ h3 {
     margin-bottom: 25px;
 
     box-shadow:
-        0 10px 35px rgba(111, 34, 184, 0.25);
+        0 10px 35px
+        rgba(111, 34, 184, 0.35);
+
 }
 
 
+/* Banner Text */
+
 .banner h1 {
+
     color: #ffffff;
+
+    font-size: 30px;
+
+    text-shadow:
+        0 3px 15px
+        rgba(0, 0, 0, 0.9);
+
 }
 
 
 .banner p {
-    color: #e4caff;
+
+    color: #f0dcff;
 
     margin-bottom: 20px;
+
+    text-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.9);
+
 }
 
 
@@ -233,16 +244,15 @@ button {
         box-shadow 0.15s;
 }
 
-
 button:hover {
 
     opacity: 0.9;
 
     box-shadow:
-        0 5px 18px rgba(145, 53, 255, 0.35);
+        0 5px 18px
+        rgba(145, 53, 255, 0.35);
 
 }
-
 
 button:active {
 
@@ -289,10 +299,10 @@ button:active {
     text-align: center;
 
     box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.25);
+        0 6px 20px
+        rgba(0, 0, 0, 0.25);
 
 }
-
 
 .package-card h3 {
 
@@ -301,7 +311,6 @@ button:active {
     font-size: 18px;
 
 }
-
 
 .package-card p {
 
@@ -314,7 +323,6 @@ button:active {
     color: #ffffff;
 
 }
-
 
 .package-card button {
 
@@ -345,17 +353,16 @@ button:active {
     margin-bottom: 20px;
 
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.3);
+        0 8px 25px
+        rgba(0, 0, 0, 0.3);
 
 }
-
 
 .id-card h3 {
 
     color: #d39aff;
 
 }
-
 
 .id-card p {
 
@@ -380,7 +387,6 @@ button:active {
     gap: 12px;
 
 }
-
 
 .features div {
 
@@ -421,10 +427,10 @@ button:active {
     padding: 22px;
 
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.3);
+        0 10px 30px
+        rgba(0, 0, 0, 0.3);
 
 }
-
 
 .checkout-box h3 {
 
@@ -461,13 +467,11 @@ input {
 
 }
 
-
 input::placeholder {
 
     color: #9e8ba9;
 
 }
-
 
 input:focus {
 
@@ -520,7 +524,6 @@ input:focus {
 
 }
 
-
 #walletAmount {
 
     margin-top: 15px;
@@ -551,15 +554,16 @@ input:focus {
 
 }
 
-
 .avatar {
 
     width: 75px;
+
     height: 75px;
 
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
     margin: 0 auto 15px;
@@ -577,7 +581,6 @@ input:focus {
 
 }
 
-
 .profile-card p {
 
     color: #d0c1da;
@@ -585,7 +588,6 @@ input:focus {
     margin: 15px 0;
 
 }
-
 
 .profile-card button {
 
@@ -605,7 +607,6 @@ input:focus {
     margin-top: 15px;
 
 }
-
 
 .empty {
 
@@ -633,7 +634,9 @@ input:focus {
     position: fixed;
 
     left: 0;
+
     right: 0;
+
     bottom: 0;
 
     z-index: 1000;
@@ -654,7 +657,6 @@ input:focus {
         rgba(0, 0, 0, 0.4);
 
 }
-
 
 .bottom-nav button {
 
@@ -680,7 +682,6 @@ input:focus {
 
 }
 
-
 .bottom-nav button span {
 
     font-size: 11px;
@@ -688,7 +689,6 @@ input:focus {
     font-weight: normal;
 
 }
-
 
 .bottom-nav button:hover {
 
@@ -712,21 +712,23 @@ input:focus {
 
     }
 
-
     .logo {
 
         font-size: 17px;
 
     }
 
-
     .banner {
+
+        min-height: 280px;
 
         padding:
             28px 16px;
 
-    }
+        background-position:
+            center center;
 
+    }
 
     .banner h1 {
 
@@ -734,13 +736,11 @@ input:focus {
 
     }
 
-
     h2 {
 
         font-size: 20px;
 
     }
-
 
     .package-grid {
 
@@ -751,7 +751,6 @@ input:focus {
 
     }
 
-
     .package-card {
 
         padding:
@@ -759,20 +758,17 @@ input:focus {
 
     }
 
-
     .package-card h3 {
 
         font-size: 16px;
 
     }
 
-
     .package-card p {
 
         font-size: 18px;
 
     }
-
 
     .package-card button {
 
@@ -783,13 +779,11 @@ input:focus {
 
     }
 
-
     .features {
 
         gap: 8px;
 
     }
-
 
     .features div {
 
@@ -816,13 +810,11 @@ input:focus {
 
     }
 
-
     .logo {
 
         font-size: 15px;
 
     }
-
 
     .bottom-nav button {
 
@@ -830,4 +822,4 @@ input:focus {
 
     }
 
-    }
+   }
