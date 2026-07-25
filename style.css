@@ -1,329 +1,833 @@
+/* ==========================================
+   BGMI UC STORE - STYLE.CSS
+   Dark + Purple Mobile Friendly Design
+========================================== */
+
+
+/* ===============================
+   BASIC RESET
+=============================== */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+
+html {
+    scroll-behavior: smooth;
+}
+
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background: #0b0712;
     color: #ffffff;
+    min-height: 100vh;
     padding-bottom: 80px;
 }
 
-/* Header */
+
+/* ===============================
+   HEADER
+=============================== */
+
 .header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
     height: 65px;
-    background: #150d24;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     padding: 0 18px;
-    border-bottom: 1px solid #32204d;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+
+    background: #140b21;
+
+    border-bottom: 1px solid #3b1d59;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.4);
 }
+
 
 .logo {
     font-size: 20px;
     font-weight: bold;
+    color: #ffffff;
 }
 
+
 .logo span {
-    color: #a855f7;
+    color: #b85cff;
 }
+
 
 .profile-btn {
     width: 42px;
     height: 42px;
+
     border: none;
     border-radius: 50%;
-    background: #241337;
+
+    background: #7b2cff;
+
     color: white;
+
     font-size: 20px;
+
     cursor: pointer;
 }
 
-/* Pages */
+
+.profile-btn:active {
+    transform: scale(0.95);
+}
+
+
+/* ===============================
+   MAIN
+=============================== */
+
+main {
+    width: 100%;
+    max-width: 900px;
+
+    margin: auto;
+
+    padding: 20px 15px;
+}
+
+
+/* ===============================
+   PAGE SYSTEM
+=============================== */
+
 .page {
     display: none;
-    padding: 20px 15px;
-    max-width: 700px;
-    margin: auto;
+
+    animation: fadeIn 0.25s ease;
 }
+
 
 .page.active {
     display: block;
 }
 
-/* Banner */
-.banner {
-    background: linear-gradient(135deg, #6d28d9, #a21caf);
-    border-radius: 20px;
-    padding: 35px 20px;
-    text-align: center;
-    margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(126, 34, 206, 0.25);
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 }
+
+
+/* ===============================
+   HEADINGS
+=============================== */
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+
+h2 {
+    font-size: 22px;
+
+    margin-top: 28px;
+    margin-bottom: 15px;
+
+    color: #ffffff;
+}
+
+
+h3 {
+    margin-bottom: 10px;
+}
+
+
+/* ===============================
+   BANNER
+=============================== */
+
+.banner {
+
+    background:
+        linear-gradient(
+            135deg,
+            #291044,
+            #641bb1,
+            #35105b
+        );
+
+    border: 1px solid #8b3dce;
+
+    border-radius: 20px;
+
+    padding: 35px 22px;
+
+    text-align: center;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 10px 35px rgba(111, 34, 184, 0.25);
+}
+
 
 .banner h1 {
-    font-size: 30px;
-    margin-bottom: 8px;
+    color: #ffffff;
 }
+
 
 .banner p {
-    color: #eadcff;
+    color: #e4caff;
+
     margin-bottom: 20px;
 }
 
-/* Headings */
-h2 {
-    font-size: 21px;
-    margin: 25px 0 15px;
+
+/* ===============================
+   BUTTONS
+=============================== */
+
+button {
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding: 12px 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b2cff,
+            #b04cff
+        );
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        opacity 0.15s,
+        box-shadow 0.15s;
 }
 
-/* Buttons */
-button {
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
+
+button:hover {
+
+    opacity: 0.9;
+
+    box-shadow:
+        0 5px 18px rgba(145, 53, 255, 0.35);
+
 }
+
 
 button:active {
+
     transform: scale(0.96);
+
 }
 
-.banner button,
-.package-card button,
-.id-card button,
-.checkout-box button,
-.profile-card button {
-    background: #a855f7;
-    color: white;
-    padding: 12px 18px;
-    border-radius: 10px;
-    font-size: 15px;
-}
 
-.banner button:hover,
-.package-card button:hover,
-.id-card button:hover {
-    background: #9333ea;
-}
+/* ===============================
+   PACKAGE GRID
+=============================== */
 
-/* Package Grid */
 .package-grid {
+
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 14px;
+
 }
+
+
+/* ===============================
+   PACKAGE CARD
+=============================== */
 
 .package-card {
-    background: #160d25;
-    border: 1px solid #302044;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1029,
+            #251238
+        );
+
+    border: 1px solid #452263;
+
     border-radius: 16px;
+
     padding: 18px 12px;
+
     text-align: center;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.25);
+
 }
+
 
 .package-card h3 {
-    color: #d8b4fe;
-    margin-bottom: 10px;
-    font-size: 17px;
+
+    color: #d09aff;
+
+    font-size: 18px;
+
 }
+
 
 .package-card p {
+
     font-size: 20px;
+
     font-weight: bold;
-    margin-bottom: 15px;
+
+    margin: 10px 0 15px;
+
+    color: #ffffff;
+
 }
+
 
 .package-card button {
+
     width: 100%;
+
 }
 
-/* ID Card */
+
+/* ===============================
+   BGMI ID CARD
+=============================== */
+
 .id-card {
-    background: #160d25;
-    border: 1px solid #302044;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b0d2a,
+            #2b1241
+        );
+
+    border: 1px solid #542b76;
+
     border-radius: 18px;
-    padding: 20px;
-    text-align: center;
+
+    padding: 22px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.3);
+
 }
+
 
 .id-card h3 {
-    color: #d8b4fe;
-    margin-bottom: 10px;
+
+    color: #d39aff;
+
 }
+
 
 .id-card p {
-    color: #c4b5fd;
-    margin: 8px 0;
+
+    color: #cfc1dc;
+
+    margin-bottom: 15px;
+
 }
 
-.id-card button {
-    margin-top: 12px;
-}
 
-/* Features */
+/* ===============================
+   FEATURES
+=============================== */
+
 .features {
+
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
     gap: 12px;
+
 }
+
 
 .features div {
-    background: #160d25;
-    border: 1px solid #302044;
+
+    background: #1a0e27;
+
+    border: 1px solid #3c2056;
+
     border-radius: 15px;
-    padding: 18px 10px;
+
+    padding: 20px 10px;
+
     text-align: center;
+
+    color: #e4d5ef;
+
     line-height: 1.8;
-    color: #ddd6fe;
+
 }
 
-/* Checkout */
+
+/* ===============================
+   CHECKOUT BOX
+=============================== */
+
 .checkout-box {
-    background: #160d25;
-    border: 1px solid #302044;
+
+    background:
+        linear-gradient(
+            145deg,
+            #190d27,
+            #281239
+        );
+
+    border: 1px solid #4c2469;
+
     border-radius: 18px;
-    padding: 20px;
+
+    padding: 22px;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.3);
+
 }
+
 
 .checkout-box h3 {
-    margin-bottom: 15px;
+
+    color: #d49aff;
+
+    margin-bottom: 18px;
+
 }
 
-.checkout-box input {
+
+/* ===============================
+   INPUTS
+=============================== */
+
+input {
+
     width: 100%;
+
     padding: 14px;
-    margin-bottom: 12px;
-    border: 1px solid #3b2753;
+
+    margin-bottom: 14px;
+
     border-radius: 10px;
-    background: #0f0918;
-    color: white;
-    font-size: 15px;
+
+    border: 1px solid #4c2865;
+
     outline: none;
+
+    background: #100817;
+
+    color: white;
+
+    font-size: 15px;
+
 }
 
-.checkout-box input:focus {
-    border-color: #a855f7;
+
+input::placeholder {
+
+    color: #9e8ba9;
+
 }
+
+
+input:focus {
+
+    border-color: #a448ff;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(164, 72, 255, 0.15);
+
+}
+
+
+/* ===============================
+   CHECKOUT BUTTONS
+=============================== */
 
 .checkout-box button {
+
     width: 100%;
-    margin-top: 10px;
+
+    margin-top: 8px;
+
 }
+
+
+/* ===============================
+   CONFIRM BUTTON
+=============================== */
 
 .confirm-btn {
-    background: #22c55e !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8d2cff,
+            #c04dff
+        );
+
 }
 
-/* Profile */
-.profile-card {
-    background: #160d25;
-    border: 1px solid #302044;
-    border-radius: 18px;
-    padding: 25px 20px;
-    text-align: center;
+
+/* ===============================
+   WALLET
+=============================== */
+
+#walletBalance,
+#profileWalletBalance {
+
+    color: #d58cff;
+
 }
+
+
+#walletAmount {
+
+    margin-top: 15px;
+
+}
+
+
+/* ===============================
+   PROFILE
+=============================== */
+
+.profile-card {
+
+    background:
+        linear-gradient(
+            145deg,
+            #1a0d28,
+            #29133c
+        );
+
+    border: 1px solid #4c2568;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    text-align: center;
+
+}
+
 
 .avatar {
+
     width: 75px;
     height: 75px;
-    background: #2a1740;
-    border-radius: 50%;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
+
+    margin: 0 auto 15px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c2cff,
+            #b94cff
+        );
+
     font-size: 35px;
-    margin: auto;
+
 }
 
-.profile-card h3 {
-    margin: 15px 0 10px;
-}
 
 .profile-card p {
-    color: #c4b5fd;
-    margin-bottom: 20px;
+
+    color: #d0c1da;
+
+    margin: 15px 0;
+
 }
+
 
 .profile-card button {
+
     width: 100%;
+
     margin-top: 10px;
+
 }
 
-/* Orders */
+
+/* ===============================
+   ORDERS
+=============================== */
+
 #orderList {
-    background: #160d25;
-    border: 1px solid #302044;
-    border-radius: 18px;
-    padding: 20px;
+
+    margin-top: 15px;
+
 }
+
 
 .empty {
+
+    background: #1a0d26;
+
+    border: 1px solid #3b2052;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
     text-align: center;
-    color: #a78bfa;
+
+    color: #a999b4;
+
 }
 
-/* Bottom Navigation */
+
+/* ===============================
+   BOTTOM NAVIGATION
+=============================== */
+
 .bottom-nav {
+
     position: fixed;
-    bottom: 0;
+
     left: 0;
-    width: 100%;
+    right: 0;
+    bottom: 0;
+
+    z-index: 1000;
+
     height: 70px;
-    background: #150d24;
-    border-top: 1px solid #32204d;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 20;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    background: #140b20;
+
+    border-top: 1px solid #3e2057;
+
+    box-shadow:
+        0 -5px 20px
+        rgba(0, 0, 0, 0.4);
+
 }
+
 
 .bottom-nav button {
+
     background: transparent;
-    color: #a78bfa;
-    font-size: 20px;
+
+    border-radius: 0;
+
+    padding: 8px 4px;
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
-    gap: 3px;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    color: #a997b3;
+
+    font-size: 20px;
+
 }
 
-.bottom-nav span {
+
+.bottom-nav button span {
+
     font-size: 11px;
-    color: #c4b5fd;
+
+    font-weight: normal;
+
 }
 
-/* Mobile */
-@media (max-width: 480px) {
+
+.bottom-nav button:hover {
+
+    background: #241135;
+
+    color: #d39aff;
+
+}
+
+
+/* ===============================
+   MOBILE
+=============================== */
+
+@media (max-width: 600px) {
+
+    main {
+
+        padding:
+            15px 12px;
+
+    }
+
 
     .logo {
+
         font-size: 17px;
+
     }
+
+
+    .banner {
+
+        padding:
+            28px 16px;
+
+    }
+
 
     .banner h1 {
+
         font-size: 25px;
+
     }
+
+
+    h2 {
+
+        font-size: 20px;
+
+    }
+
 
     .package-grid {
-        grid-template-columns: repeat(2, 1fr);
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 10px;
+
     }
+
 
     .package-card {
-        padding: 15px 8px;
+
+        padding:
+            15px 8px;
+
     }
+
 
     .package-card h3 {
-        font-size: 15px;
+
+        font-size: 16px;
+
     }
 
+
     .package-card p {
+
         font-size: 18px;
+
+    }
+
+
+    .package-card button {
+
+        padding:
+            10px 5px;
+
+        font-size: 13px;
+
+    }
+
+
+    .features {
+
+        gap: 8px;
+
+    }
+
+
+    .features div {
+
+        padding:
+            15px 5px;
+
+        font-size: 13px;
+
     }
 
 }
+
+
+/* ===============================
+   SMALL MOBILE
+=============================== */
+
+@media (max-width: 380px) {
+
+    .package-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .logo {
+
+        font-size: 15px;
+
+    }
+
+
+    .bottom-nav button {
+
+        font-size: 18px;
+
+    }
+
+    }
