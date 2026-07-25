@@ -1,626 +1,645 @@
-<!DOCTYPE html>
-<html lang="hi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+// ==========================================
+// BGMI UC STORE - SCRIPT.JS
+// ==========================================
 
-    <title>BGMI UC Store</title>
+// STORE DETAILS
+const whatsappNumber = "918279207685";
+const upiID = "8279207685@apl";
 
-    <link rel="stylesheet" href="style.css">
-</head>
+let selectedItem = "";
+let selectedPrice = "";
+let selectedAccount = "";
 
-<body>
 
-    <!-- HEADER -->
-    <header class="header">
+// ==========================================
+// PAGE NAVIGATION
+// ==========================================
 
-        <div class="logo">
-            🎮 BGMI <span>UC STORE</span>
-        </div>
+function showPage(pageId) {
 
-        <button
-            onclick="showPage('profile')"
-            class="profile-btn">
-            👤
-        </button>
+    const pages = document.querySelectorAll(".page");
 
-    </header>
+    pages.forEach(function(page) {
+        page.classList.remove("active");
+    });
 
+    const page = document.getElementById(pageId);
 
-    <!-- MAIN APP -->
-    <main>
+    if (page) {
+        page.classList.add("active");
+    }
 
+    window.scrollTo(0, 0);
 
-        <!-- ================= HOME ================= -->
+    loadOrders();
+    updateWalletDisplay();
+}
 
-        <section id="home" class="page active">
 
-            <div class="banner">
+// ==========================================
+// UC PACKAGE SELECT
+// ==========================================
 
-                <h1>🎮 BGMI UC STORE</h1>
+function buyPackage(packageName, price) {
 
-                <p>
-                    Fast • Secure • Trusted
-                </p>
+    selectedItem = packageName;
+    selectedPrice = price;
 
-                <button onclick="showPage('packages')">
-                    💎 UC Store
-                </button>
+    const selectedPackage =
+        document.getElementById("selectedPackage");
 
-            </div>
+    if (selectedPackage) {
 
+        selectedPackage.innerText =
+            "💎 " + packageName + " — " + price;
 
-            <h2>
-                🎮 BGMI Account Store
-            </h2>
+    }
 
+    showPage("checkout");
+}
 
-            <div class="id-card">
 
-                <h3>
-                    🔥 BGMI Accounts Available
-                </h3>
+// ==========================================
+// BGMI ACCOUNT SELECT
+// ==========================================
 
-                <p>
-                    Premium BGMI IDs Available
-                </p>
+function buyID(accountName, price) {
 
-                <button onclick="showPage('idstore')">
-                    View Accounts
-                </button>
+    selectedAccount = accountName;
+    selectedPrice = price;
 
-            </div>
+    const selectedAccountBox =
+        document.getElementById("selectedAccount");
 
+    if (selectedAccountBox) {
 
-            <h2>
-                ⭐ Why Choose Us?
-            </h2>
+        selectedAccountBox.innerText =
+            "🎮 " + accountName + " — " + price;
 
+    }
 
-            <div class="features">
+    showPage("accountPayment");
+}
 
-                <div>
-                    ⚡
-                    <br>
-                    Fast Delivery
-                </div>
 
+// ==========================================
+// UPI PAYMENT
+// ==========================================
 
-                <div>
-                    🔒
-                    <br>
-                    Secure Payment
-                </div>
+function openUPIPayment(amount, note) {
 
+    let cleanAmount = String(amount)
+        .replace(/[₹,]/g, "")
+        .trim();
 
-                <div>
-                    💎
-                    <br>
-                    Best Prices
-                </div>
+    const upiLink =
+        "upi://pay?" +
+        "pa=" + encodeURIComponent(upiID) +
+        "&pn=" + encodeURIComponent("BGMI UC STORE") +
+        "&am=" + encodeURIComponent(cleanAmount) +
+        "&cu=INR" +
+        "&tn=" + encodeURIComponent(note);
 
+    window.location.href = upiLink;
+}
 
-                <div>
-                    📲
-                    <br>
-                    24×7 Support
-                </div>
 
-            </div>
+// ==========================================
+// UC - PAY NOW
+// ==========================================
 
-        </section>
+function payForUC() {
 
+    const playerID =
+        document.getElementById("playerID").value.trim();
 
+    const playerName =
+        document.getElementById("playerName").value.trim();
 
-        <!-- ================= UC STORE ================= -->
 
-        <section id="packages" class="page">
+    if (selectedItem === "") {
 
-            <h2>
-                💎 UC Store
-            </h2>
+        alert("कृपया पहले UC Package चुनें।");
 
+        return;
+    }
 
-            <div class="package-grid">
 
+    if (playerID === "") {
 
-                <div class="package-card">
+        alert("कृपया अपना BGMI Player ID डालें।");
 
-                    <h3>
-                        💎 1,500 UC
-                    </h3>
+        return;
+    }
 
-                    <p>
-                        ₹750
-                    </p>
 
-                    <button
-                        onclick="buyPackage('1,500 UC','₹750')">
-                        Buy Now
-                    </button>
+    if (playerName === "") {
 
-                </div>
+        alert("कृपया अपना Player Name डालें।");
 
+        return;
+    }
 
-                <div class="package-card">
 
-                    <h3>
-                        💎 3,000 UC
-                    </h3>
+    const order = {
 
-                    <p>
-                        ₹1,500
-                    </p>
+        type: "UC",
 
-                    <button
-                        onclick="buyPackage('3,000 UC','₹1,500')">
-                        Buy Now
-                    </button>
+        item: selectedItem,
 
-                </div>
+        price: selectedPrice,
 
+        playerID: playerID,
 
-                <div class="package-card">
+        playerName: playerName,
 
-                    <h3>
-                        💎 6,000 UC
-                    </h3>
+        status: "Payment Pending",
 
-                    <p>
-                        ₹3,000
-                    </p>
+        date: new Date().toLocaleString("en-IN")
 
-                    <button
-                        onclick="buyPackage('6,000 UC','₹3,000')">
-                        Buy Now
-                    </button>
+    };
 
-                </div>
 
+    saveOrder(order);
 
-                <div class="package-card">
 
-                    <h3>
-                        💎 10,000 UC
-                    </h3>
+    openUPIPayment(
 
-                    <p>
-                        ₹6,000
-                    </p>
+        selectedPrice,
 
-                    <button
-                        onclick="buyPackage('10,000 UC','₹6,000')">
-                        Buy Now
-                    </button>
+        selectedItem +
+        " - Player ID " +
+        playerID
 
-                </div>
+    );
 
+}
 
-                <div class="package-card">
 
-                    <h3>
-                        💎 15,000 UC
-                    </h3>
+// ==========================================
+// UC - WHATSAPP ORDER
+// ==========================================
 
-                    <p>
-                        ₹7,500
-                    </p>
+function sendUCWhatsApp() {
 
-                    <button
-                        onclick="buyPackage('15,000 UC','₹7,500')">
-                        Buy Now
-                    </button>
+    const playerID =
+        document.getElementById("playerID").value.trim();
 
-                </div>
+    const playerName =
+        document.getElementById("playerName").value.trim();
 
 
-                <div class="package-card">
+    if (selectedItem === "") {
 
-                    <h3>
-                        💎 30,000 UC
-                    </h3>
+        alert("कृपया पहले UC Package चुनें।");
 
-                    <p>
-                        ₹10,000
-                    </p>
+        return;
+    }
 
-                    <button
-                        onclick="buyPackage('30,000 UC','₹10,000')">
-                        Buy Now
-                    </button>
 
-                </div>
+    if (playerID === "") {
 
+        alert("कृपया अपना BGMI Player ID डालें।");
 
-                <div class="package-card">
+        return;
+    }
 
-                    <h3>
-                        💎 50,000 UC
-                    </h3>
 
-                    <p>
-                        ₹15,000
-                    </p>
+    if (playerName === "") {
 
-                    <button
-                        onclick="buyPackage('50,000 UC','₹15,000')">
-                        Buy Now
-                    </button>
+        alert("कृपया अपना Player Name डालें।");
 
-                </div>
+        return;
+    }
 
 
-                <div class="package-card">
+    const message =
 
-                    <h3>
-                        💎 100,000 UC
-                    </h3>
+        "🎮 BGMI UC STORE ORDER\n\n" +
 
-                    <p>
-                        ₹30,000
-                    </p>
+        "💎 Package: " +
+        selectedItem +
+        "\n" +
 
-                    <button
-                        onclick="buyPackage('100,000 UC','₹30,000')">
-                        Buy Now
-                    </button>
+        "💰 Price: " +
+        selectedPrice +
+        "\n" +
 
-                </div>
+        "🆔 Player ID: " +
+        playerID +
+        "\n" +
 
+        "👤 Player Name: " +
+        playerName +
+        "\n\n" +
 
-            </div>
+        "⏳ Status: Payment Pending";
 
-        </section>
 
+    const whatsappURL =
 
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
 
-        <!-- ================= BGMI ACCOUNT STORE ================= -->
 
-        <section id="idstore" class="page">
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
 
-            <h2>
-                🎮 BGMI Account Store
-            </h2>
+}
 
 
-            <div class="id-card">
+// ==========================================
+// BGMI ACCOUNT - PAY NOW
+// ==========================================
 
-                <h3>
-                    🔥 BGMI Account #001
-                </h3>
+function payForAccount() {
 
-                <p>
-                    Premium BGMI Account
-                </p>
+    if (selectedAccount === "") {
 
-                <p>
-                    💰 Price: ₹2,999
-                </p>
+        alert("कृपया पहले BGMI Account चुनें।");
 
+        return;
+    }
 
-                <button
-                    onclick="buyID('BGMI Account #001','₹2,999')">
 
-                    🛒 Buy Account
+    const order = {
 
-                </button>
+        type: "BGMI Account",
 
-            </div>
+        item: selectedAccount,
 
+        price: selectedPrice,
 
-            <!-- यहाँ बाद में और Accounts जोड़ सकते हैं -->
+        status: "Payment Pending",
 
-        </section>
+        date: new Date().toLocaleString("en-IN")
 
+    };
 
 
-        <!-- ================= UC CHECKOUT ================= -->
+    saveOrder(order);
 
-        <section id="checkout" class="page">
 
-            <h2>
-                🛒 UC Checkout
-            </h2>
+    openUPIPayment(
 
+        selectedPrice,
 
-            <div class="checkout-box">
+        selectedAccount + " Purchase"
 
+    );
 
-                <h3 id="selectedPackage">
-                    Selected Package
-                </h3>
+}
 
 
-                <input
-                    type="text"
-                    id="playerID"
-                    placeholder="अपना BGMI Player ID डालें">
+// ==========================================
+// BGMI ACCOUNT - WHATSAPP
+// ==========================================
 
+function sendAccountWhatsApp() {
 
-                <input
-                    type="text"
-                    id="playerName"
-                    placeholder="अपना Player Name डालें">
+    if (selectedAccount === "") {
 
+        alert("पहले BGMI Account चुनें।");
 
-                <h3>
-                    💳 Payment
-                </h3>
+        return;
+    }
 
 
-                <button
-                    class="confirm-btn"
-                    onclick="selectPayment('UPI'); confirmOrder();">
+    const message =
 
-                    📱 Pay Now — UPI
+        "🎮 BGMI ACCOUNT ORDER\n\n" +
 
-                </button>
+        "📦 Account: " +
+        selectedAccount +
+        "\n" +
 
+        "💰 Price: " +
+        selectedPrice +
+        "\n\n" +
 
-                <button
-                    onclick="selectPayment('WhatsApp'); confirmOrder();">
+        "💳 Payment: UPI\n" +
 
-                    📲 WhatsApp Order
+        "⏳ Status: Payment Pending\n\n" +
 
-                </button>
+        "कृपया Payment Screenshot भेजें।";
 
 
-            </div>
+    const whatsappURL =
 
-        </section>
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
 
 
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
 
-        <!-- ================= ACCOUNT PAYMENT ================= -->
+}
 
-        <section id="accountPayment" class="page">
 
-            <h2>
-                🛒 Account Checkout
-            </h2>
+// ==========================================
+// SAVE ORDER
+// ==========================================
 
+function saveOrder(order) {
 
-            <div class="checkout-box">
+    let orders =
 
+        JSON.parse(
+            localStorage.getItem("bgmiOrders")
+        ) || [];
 
-                <h3 id="selectedAccount">
-                    Selected Account
-                </h3>
 
+    orders.push(order);
 
-                <p>
-                    BGMI Account खरीदने के लिए नीचे Payment करें।
-                </p>
 
+    localStorage.setItem(
 
-                <h3>
-                    💳 Payment
-                </h3>
+        "bgmiOrders",
 
+        JSON.stringify(orders)
 
-                <button
-                    class="confirm-btn"
-                    onclick="payForAccount()">
+    );
 
-                    📱 Pay Now — UPI
 
-                </button>
+    loadOrders();
 
+}
 
-                <button
-                    onclick="sendAccountWhatsApp()">
 
-                    📲 Payment के बाद WhatsApp Order भेजें
+// ==========================================
+// LOAD ORDERS
+// ==========================================
 
-                </button>
+function loadOrders() {
 
+    const orderList =
+        document.getElementById("orderList");
 
-            </div>
 
-        </section>
+    if (!orderList) {
+        return;
+    }
 
 
+    let orders =
 
-        <!-- ================= ADD MONEY / WALLET ================= -->
+        JSON.parse(
+            localStorage.getItem("bgmiOrders")
+        ) || [];
 
-        <section id="wallet" class="page">
 
-            <h2>
-                💰 Add Money to Wallet
-            </h2>
+    if (orders.length === 0) {
 
+        orderList.innerHTML =
+            '<p class="empty">अभी कोई Order नहीं है।</p>';
 
-            <div class="checkout-box">
+        return;
+    }
 
 
-                <h3>
-                    Current Wallet Balance
-                </h3>
+    orderList.innerHTML = "";
 
 
-                <h2 id="walletBalance">
-                    ₹0
-                </h2>
+    orders
+        .slice()
+        .reverse()
+        .forEach(function(order) {
 
 
-                <input
-                    type="number"
-                    id="walletAmount"
-                    placeholder="Amount डालें">
+            const orderCard =
+                document.createElement("div");
 
 
-                <button
-                    class="confirm-btn"
-                    onclick="addMoneyToWallet()">
+            orderCard.style.background =
+                "#211330";
 
-                    💳 Pay & Add Money
+            orderCard.style.padding =
+                "15px";
 
-                </button>
+            orderCard.style.marginBottom =
+                "12px";
 
+            orderCard.style.borderRadius =
+                "12px";
 
-                <p>
-                    Payment के बाद Balance verification के लिए
-                    Support से संपर्क करें।
-                </p>
 
+            let details = "";
 
-            </div>
 
-        </section>
+            if (order.type === "UC") {
 
+                details =
 
+                    "<p>🆔 Player ID: " +
+                    order.playerID +
+                    "</p>" +
 
-        <!-- ================= MY ORDERS ================= -->
+                    "<p>👤 Player Name: " +
+                    order.playerName +
+                    "</p>";
 
-        <section id="orders" class="page">
+            }
 
-            <h2>
-                📦 My Orders
-            </h2>
 
+            orderCard.innerHTML =
 
-            <div id="orderList">
+                "<h3>📦 " +
+                order.item +
+                "</h3>" +
 
-                <p class="empty">
-                    अभी कोई Order नहीं है।
-                </p>
+                "<p>💰 Price: " +
+                order.price +
+                "</p>" +
 
-            </div>
+                details +
 
-        </section>
+                "<p>⏳ Status: " +
+                order.status +
+                "</p>" +
 
+                "<p>📅 Date: " +
+                order.date +
+                "</p>";
 
 
-        <!-- ================= PROFILE ================= -->
+            orderList.appendChild(
+                orderCard
+            );
 
-        <section id="profile" class="page">
+        });
 
-            <h2>
-                👤 My Profile
-            </h2>
+}
 
 
-            <div class="profile-card">
+// ==========================================
+// GET WALLET BALANCE
+// ==========================================
 
+function getWalletBalance() {
 
-                <div class="avatar">
-                    👤
-                </div>
+    return Number(
 
+        localStorage.getItem(
+            "walletBalance"
+        )
 
-                <h3>
-                    Guest User
-                </h3>
+    ) || 0;
 
+}
 
-                <p>
-                    💰 Wallet Balance:
-                    <strong id="profileWalletBalance">
-                        ₹0
-                    </strong>
-                </p>
 
+// ==========================================
+// UPDATE WALLET DISPLAY
+// ==========================================
 
-                <button
-                    onclick="showPage('wallet')">
+function updateWalletDisplay() {
 
-                    💰 Add Money
+    const balance =
+        getWalletBalance();
 
-                </button>
 
+    const profileBalance =
+        document.getElementById(
+            "profileWalletBalance"
+        );
 
-                <button
-                    onclick="showPage('orders')">
 
-                    📦 My Orders
+    const walletBalance =
+        document.getElementById(
+            "walletBalance"
+        );
 
-                </button>
 
+    if (profileBalance) {
 
-                <button
-                    onclick="contactWhatsApp()">
+        profileBalance.innerText =
+            "₹" +
+            balance.toLocaleString("en-IN");
 
-                    📲 Support
+    }
 
-                </button>
 
+    if (walletBalance) {
 
-                <button>
+        walletBalance.innerText =
+            "₹" +
+            balance.toLocaleString("en-IN");
 
-                    ⚙️ Settings
+    }
 
-                </button>
+}
 
 
-            </div>
+// ==========================================
+// ADD MONEY TO WALLET
+// ==========================================
 
-        </section>
+function addMoneyToWallet() {
 
+    const amountInput =
+        document.getElementById(
+            "walletAmount"
+        );
 
-    </main>
 
+    const amount =
+        Number(amountInput.value);
 
 
-    <!-- ================= BOTTOM NAVIGATION ================= -->
+    if (!amount || amount <= 0) {
 
-    <nav class="bottom-nav">
+        alert(
+            "कृपया सही Amount डालें।"
+        );
 
+        return;
+    }
 
-        <button
-            onclick="showPage('home')">
 
-            🏠
+    const pendingPayment = {
 
-            <span>
-                Home
-            </span>
+        amount: amount,
 
-        </button>
+        status: "Payment Pending",
 
+        date: new Date().toLocaleString("en-IN")
 
-        <button
-            onclick="showPage('packages')">
+    };
 
-            💎
 
-            <span>
-                UC Store
-            </span>
+    localStorage.setItem(
 
-        </button>
+        "pendingWalletPayment",
 
+        JSON.stringify(
+            pendingPayment
+        )
 
-        <button
-            onclick="showPage('orders')">
+    );
 
-            📦
 
-            <span>
-                Orders
-            </span>
+    openUPIPayment(
 
-        </button>
+        "₹" +
+        amount.toLocaleString("en-IN"),
 
+        "Wallet Add Money"
 
-        <button
-            onclick="showPage('profile')">
+    );
 
-            👤
+}
 
-            <span>
-                Profile
-            </span>
 
-        </button>
+// ==========================================
+// WHATSAPP SUPPORT
+// ==========================================
 
+function contactWhatsApp() {
 
-    </nav>
+    const message =
 
+        "Hello BGMI UC STORE,\n" +
+        "मुझे Support चाहिए।";
 
 
-    <!-- JAVASCRIPT -->
+    const whatsappURL =
 
-    <script src="script.js"></script>
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
 
-</body>
-</html>
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+}
+
+
+// ==========================================
+// PAGE LOAD
+// ==========================================
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    function() {
+
+        loadOrders();
+
+        updateWalletDisplay();
+
+    }
+
+);
