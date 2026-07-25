@@ -11,333 +11,657 @@
 
 <body>
 
-    <!-- Header -->
+    <!-- HEADER -->
     <header class="header">
+
         <div class="logo">
             🎮 BGMI <span>UC STORE</span>
         </div>
 
-        <button onclick="showPage('profile')" class="profile-btn">
+        <button
+            onclick="showPage('profile')"
+            class="profile-btn">
             👤
         </button>
+
     </header>
 
 
-    <!-- Main App -->
+    <!-- MAIN APP -->
     <main>
 
-        <!-- HOME -->
+
+        <!-- ================= HOME ================= -->
+
         <section id="home" class="page active">
 
             <div class="banner">
-                <h1>BGMI UC STORE</h1>
-                <p>Fast • Secure • Trusted</p>
 
-                <button onclick="showPage('packages')">
+                <h1>BGMI UC STORE</h1>
+
+                <p>
+                    Fast • Secure • Trusted
+                </p>
+
+                <button
+                    onclick="showPage('packages')">
                     💎 UC खरीदें
                 </button>
+
             </div>
 
 
-            <h2>🔥 Popular UC Packages</h2>
+            <h2>
+                🔥 Popular UC Packages
+            </h2>
+
 
             <div class="package-grid">
 
-                <div class="package-card">
-                    <h3>💎 1,500 UC</h3>
-                    <p>₹750</p>
-                    <button onclick="buyPackage('1,500 UC','₹750')">
-                        Buy Now
-                    </button>
-                </div>
+
+                <!-- 1500 UC -->
 
                 <div class="package-card">
-                    <h3>💎 3,000 UC</h3>
-                    <p>₹1,500</p>
-                    <button onclick="buyPackage('3,000 UC','₹1,500')">
+
+                    <h3>
+                        💎 1,500 UC
+                    </h3>
+
+                    <p>
+                        ₹750
+                    </p>
+
+                    <button
+                        onclick="buyPackage('1,500 UC','₹750')">
                         Buy Now
                     </button>
+
                 </div>
 
+
+                <!-- 3000 UC -->
+
                 <div class="package-card">
-                    <h3>💎 6,000 UC</h3>
-                    <p>₹3,000</p>
-                    <button onclick="buyPackage('6,000 UC','₹3,000')">
+
+                    <h3>
+                        💎 3,000 UC
+                    </h3>
+
+                    <p>
+                        ₹1,500
+                    </p>
+
+                    <button
+                        onclick="buyPackage('3,000 UC','₹1,500')">
                         Buy Now
                     </button>
+
                 </div>
+
+
+                <!-- 6000 UC -->
+
+                <div class="package-card">
+
+                    <h3>
+                        💎 6,000 UC
+                    </h3>
+
+                    <p>
+                        ₹3,000
+                    </p>
+
+                    <button
+                        onclick="buyPackage('6,000 UC','₹3,000')">
+                        Buy Now
+                    </button>
+
+                </div>
+
 
             </div>
 
 
-            <!-- ID STORE -->
-            <h2>🎮 BGMI ID STORE</h2>
+            <!-- BGMI ID STORE -->
+
+            <h2>
+                🎮 BGMI ID STORE
+            </h2>
+
 
             <div class="id-card">
-                <h3>🔥 BGMI Account Available</h3>
 
-                <p>Premium BGMI ID</p>
+                <h3>
+                    🔥 BGMI Account Available
+                </h3>
 
-                <button onclick="showPage('idstore')">
+                <p>
+                    Premium BGMI ID
+                </p>
+
+                <button
+                    onclick="showPage('idstore')">
                     View Accounts
                 </button>
+
             </div>
 
 
             <!-- WHY CHOOSE US -->
-            <h2>⭐ Why Choose Us?</h2>
+
+            <h2>
+                ⭐ Why Choose Us?
+            </h2>
+
 
             <div class="features">
 
+
                 <div>
+
                     ⚡
+
                     <br>
+
                     Fast Delivery
+
                 </div>
 
+
                 <div>
+
                     🔒
+
                     <br>
-                    Secure
+
+                    Secure Payment
+
                 </div>
 
+
                 <div>
+
                     💎
+
                     <br>
+
                     Best Prices
+
                 </div>
+
 
                 <div>
+
                     📲
+
                     <br>
+
                     24×7 Support
+
                 </div>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- UC PACKAGES -->
-        <section id="packages" class="page">
 
-            <h2>💎 UC Packages</h2>
+        <!-- ================= UC PACKAGES ================= -->
 
-            <div class="package-grid">
+        <section
+            id="packages"
+            class="page">
 
-                <div class="package-card">
-                    <h3>1,500 UC</h3>
-                    <p>₹750</p>
-                    <button onclick="buyPackage('1,500 UC','₹750')">
-                        Buy Now
-                    </button>
-                </div>
 
-                <div class="package-card">
-                    <h3>3,000 UC</h3>
-                    <p>₹1,500</p>
-                    <button onclick="buyPackage('3,000 UC','₹1,500')">
-                        Buy Now
-                    </button>
-                </div>
+            <h2>
+                💎 UC Packages
+            </h2>
+
+
+            <div
+                class="package-grid">
+
 
                 <div class="package-card">
-                    <h3>6,000 UC</h3>
-                    <p>₹3,000</p>
-                    <button onclick="buyPackage('6,000 UC','₹3,000')">
+
+                    <h3>
+                        1,500 UC
+                    </h3>
+
+                    <p>
+                        ₹750
+                    </p>
+
+                    <button
+                        onclick="buyPackage('1,500 UC','₹750')">
                         Buy Now
                     </button>
+
                 </div>
 
-                <div class="package-card">
-                    <h3>10,000 UC</h3>
-                    <p>₹6,000</p>
-                    <button onclick="buyPackage('10,000 UC','₹6,000')">
-                        Buy Now
-                    </button>
-                </div>
+
 
                 <div class="package-card">
-                    <h3>15,000 UC</h3>
-                    <p>₹7,500</p>
-                    <button onclick="buyPackage('15,000 UC','₹7,500')">
+
+                    <h3>
+                        3,000 UC
+                    </h3>
+
+                    <p>
+                        ₹1,500
+                    </p>
+
+                    <button
+                        onclick="buyPackage('3,000 UC','₹1,500')">
                         Buy Now
                     </button>
+
                 </div>
 
-                <div class="package-card">
-                    <h3>30,000 UC</h3>
-                    <p>₹10,000</p>
-                    <button onclick="buyPackage('30,000 UC','₹10,000')">
-                        Buy Now
-                    </button>
-                </div>
+
 
                 <div class="package-card">
-                    <h3>50,000 UC</h3>
-                    <p>₹15,000</p>
-                    <button onclick="buyPackage('50,000 UC','₹15,000')">
+
+                    <h3>
+                        6,000 UC
+                    </h3>
+
+                    <p>
+                        ₹3,000
+                    </p>
+
+                    <button
+                        onclick="buyPackage('6,000 UC','₹3,000')">
                         Buy Now
                     </button>
+
                 </div>
 
+
+
                 <div class="package-card">
-                    <h3>100,000 UC</h3>
-                    <p>₹30,000</p>
-                    <button onclick="buyPackage('100,000 UC','₹30,000')">
+
+                    <h3>
+                        10,000 UC
+                    </h3>
+
+                    <p>
+                        ₹6,000
+                    </p>
+
+                    <button
+                        onclick="buyPackage('10,000 UC','₹6,000')">
                         Buy Now
                     </button>
+
                 </div>
+
+
+
+                <div class="package-card">
+
+                    <h3>
+                        15,000 UC
+                    </h3>
+
+                    <p>
+                        ₹7,500
+                    </p>
+
+                    <button
+                        onclick="buyPackage('15,000 UC','₹7,500')">
+                        Buy Now
+                    </button>
+
+                </div>
+
+
+
+                <div class="package-card">
+
+                    <h3>
+                        30,000 UC
+                    </h3>
+
+                    <p>
+                        ₹10,000
+                    </p>
+
+                    <button
+                        onclick="buyPackage('30,000 UC','₹10,000')">
+                        Buy Now
+                    </button>
+
+                </div>
+
+
+
+                <div class="package-card">
+
+                    <h3>
+                        50,000 UC
+                    </h3>
+
+                    <p>
+                        ₹15,000
+                    </p>
+
+                    <button
+                        onclick="buyPackage('50,000 UC','₹15,000')">
+                        Buy Now
+                    </button>
+
+                </div>
+
+
+
+                <div class="package-card">
+
+                    <h3>
+                        100,000 UC
+                    </h3>
+
+                    <p>
+                        ₹30,000
+                    </p>
+
+                    <button
+                        onclick="buyPackage('100,000 UC','₹30,000')">
+                        Buy Now
+                    </button>
+
+                </div>
+
 
             </div>
+
 
         </section>
 
 
-        <!-- BGMI ID STORE -->
-        <section id="idstore" class="page">
 
-            <h2>🎮 BGMI ID STORE</h2>
+        <!-- ================= BGMI ID STORE ================= -->
+
+        <section
+            id="idstore"
+            class="page">
+
+
+            <h2>
+                🎮 BGMI ID STORE
+            </h2>
+
 
             <div class="id-card">
 
-                <h3>BGMI Account #001</h3>
 
-                <p>🔥 Premium Account</p>
+                <h3>
+                    BGMI Account #001
+                </h3>
 
-                <p>💰 Price: ₹2,999</p>
 
-                <button onclick="buyID('BGMI Account #001','₹2,999')">
+                <p>
+                    🔥 Premium Account
+                </p>
+
+
+                <p>
+                    💰 Price: ₹2,999
+                </p>
+
+
+                <button
+                    onclick="buyID('BGMI Account #001','₹2,999')">
                     Buy Account
                 </button>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- CHECKOUT -->
-        <section id="checkout" class="page">
 
-            <h2>🛒 Checkout</h2>
+        <!-- ================= CHECKOUT ================= -->
 
-            <div class="checkout-box">
+        <section
+            id="checkout"
+            class="page">
 
-                <h3 id="selectedPackage">
+
+            <h2>
+                🛒 Checkout
+            </h2>
+
+
+            <div
+                class="checkout-box">
+
+
+                <!-- SELECTED PACKAGE -->
+
+                <h3
+                    id="selectedPackage">
+
                     Selected Package
+
                 </h3>
+
+
+                <!-- PLAYER ID -->
 
                 <input
                     type="text"
                     id="playerID"
-                    placeholder="अपना BGMI Player ID डालें"
-                >
+                    placeholder="अपना BGMI Player ID डालें">
+
+
+                <!-- PLAYER NAME -->
 
                 <input
                     type="text"
                     id="playerName"
-                    placeholder="अपना Player Name डालें"
-                >
+                    placeholder="अपना Player Name डालें">
 
-                <h3>💳 Payment Method</h3>
 
-                <button onclick="selectPayment('UPI')">
-                    📱 UPI Payment
-                </button>
+                <h3>
+                    💳 Payment
+                </h3>
 
-                <button onclick="selectPayment('WhatsApp')">
-                    📲 WhatsApp Order
-                </button>
+
+                <!-- DIRECT UPI PAYMENT -->
 
                 <button
                     class="confirm-btn"
-                    onclick="confirmOrder()">
-                    ✅ Confirm Order
+                    onclick="selectPayment('UPI'); confirmOrder();">
+
+                    📱 Pay Now — UPI
+
                 </button>
 
+
+                <!-- WHATSAPP ORDER -->
+
+                <button
+                    onclick="selectPayment('WhatsApp'); confirmOrder();">
+
+                    📲 WhatsApp Order
+
+                </button>
+
+
             </div>
+
 
         </section>
 
 
-        <!-- MY ORDERS -->
-        <section id="orders" class="page">
 
-            <h2>📦 My Orders</h2>
+        <!-- ================= MY ORDERS ================= -->
 
-            <div id="orderList">
+        <section
+            id="orders"
+            class="page">
 
-                <p class="empty">
+
+            <h2>
+                📦 My Orders
+            </h2>
+
+
+            <div
+                id="orderList">
+
+
+                <p
+                    class="empty">
+
                     अभी कोई Order नहीं है।
+
                 </p>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- PROFILE -->
-        <section id="profile" class="page">
 
-            <h2>👤 My Profile</h2>
+        <!-- ================= PROFILE ================= -->
 
-            <div class="profile-card">
+        <section
+            id="profile"
+            class="page">
 
-                <div class="avatar">
+
+            <h2>
+                👤 My Profile
+            </h2>
+
+
+            <div
+                class="profile-card">
+
+
+                <div
+                    class="avatar">
+
                     👤
+
                 </div>
 
-                <h3>Guest User</h3>
 
-                <p>💰 Wallet Balance: ₹0</p>
+                <h3>
+                    Guest User
+                </h3>
 
-                <button onclick="showPage('orders')">
+
+                <p>
+                    💰 Wallet Balance: ₹0
+                </p>
+
+
+                <button
+                    onclick="showPage('orders')">
+
                     📦 My Orders
+
                 </button>
 
-                <button onclick="contactWhatsApp()">
+
+                <button
+                    onclick="contactWhatsApp()">
+
                     📲 Support
+
                 </button>
+
 
                 <button>
+
                     ⚙️ Settings
+
                 </button>
+
 
             </div>
 
+
         </section>
+
 
     </main>
 
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
 
-        <button onclick="showPage('home')">
+    <!-- ================= BOTTOM NAVIGATION ================= -->
+
+    <nav
+        class="bottom-nav">
+
+
+        <button
+            onclick="showPage('home')">
+
             🏠
-            <span>Home</span>
+
+            <span>
+                Home
+            </span>
+
         </button>
 
-        <button onclick="showPage('packages')">
+
+        <button
+            onclick="showPage('packages')">
+
             💎
-            <span>UC</span>
+
+            <span>
+                UC
+            </span>
+
         </button>
 
-        <button onclick="showPage('orders')">
+
+        <button
+            onclick="showPage('orders')">
+
             📦
-            <span>Orders</span>
+
+            <span>
+                Orders
+            </span>
+
         </button>
 
-        <button onclick="showPage('profile')">
+
+        <button
+            onclick="showPage('profile')">
+
             👤
-            <span>Profile</span>
+
+            <span>
+                Profile
+            </span>
+
         </button>
+
 
     </nav>
 
 
-    <!-- JavaScript -->
-    <script src="script.js"></script>
+
+    <!-- JAVASCRIPT -->
+
+    <script
+        src="script.js">
+    </script>
+
 
 </body>
 </html>
