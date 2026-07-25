@@ -1,5 +1,5 @@
 // ===============================
-// BGMI UC STORE - JAVASCRIPT
+// BGMI UC STORE - SCRIPT.JS
 // ===============================
 
 // चुना हुआ पैकेज
@@ -7,27 +7,31 @@ let selectedItem = "";
 let selectedPrice = "";
 let paymentMethod = "";
 
+// तुम्हारा WhatsApp नंबर
+const whatsappNumber = "918279207685";
+
+// तुम्हारी UPI ID
+const upiID = "8279207685@apl";
+
+
 // ===============================
 // PAGE CHANGE
 // ===============================
 
 function showPage(pageId) {
 
-    // सभी पेज छुपाओ
     const pages = document.querySelectorAll(".page");
 
     pages.forEach(function(page) {
         page.classList.remove("active");
     });
 
-    // चुना हुआ पेज दिखाओ
     const selectedPage = document.getElementById(pageId);
 
     if (selectedPage) {
         selectedPage.classList.add("active");
     }
 
-    // ऊपर से पेज दिखाओ
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -44,8 +48,13 @@ function buyPackage(packageName, price) {
     selectedItem = packageName;
     selectedPrice = price;
 
-    document.getElementById("selectedPackage").innerText =
-        "💎 " + packageName + " — " + price;
+    const packageBox =
+        document.getElementById("selectedPackage");
+
+    if (packageBox) {
+        packageBox.innerText =
+            "💎 " + packageName + " — " + price;
+    }
 
     showPage("checkout");
 }
@@ -60,8 +69,13 @@ function buyID(accountName, price) {
     selectedItem = accountName;
     selectedPrice = price;
 
-    document.getElementById("selectedPackage").innerText =
-        "🎮 " + accountName + " — " + price;
+    const packageBox =
+        document.getElementById("selectedPackage");
+
+    if (packageBox) {
+        packageBox.innerText =
+            "🎮 " + accountName + " — " + price;
+    }
 
     showPage("checkout");
 }
@@ -78,8 +92,9 @@ function selectPayment(method) {
     if (method === "UPI") {
 
         alert(
-            "UPI Payment चुना गया है।\n\n" +
-            "अगले स्टेप में यहाँ आपका UPI ID और QR Code जोड़ा जाएगा।"
+            "💳 UPI Payment\n\n" +
+            "UPI ID: " + upiID +
+            "\n\nQR Code जल्द ही यहाँ जोड़ा जाएगा।"
         );
 
     }
@@ -87,8 +102,8 @@ function selectPayment(method) {
     if (method === "WhatsApp") {
 
         alert(
-            "WhatsApp Order चुना गया है।\n\n" +
-            "Confirm Order दबाने पर WhatsApp पर Order भेजा जाएगा।"
+            "📲 WhatsApp Order चुना गया है।\n\n" +
+            "Confirm Order दबाने के बाद Order WhatsApp पर भेजा जाएगा।"
         );
 
     }
@@ -157,48 +172,58 @@ function confirmOrder() {
 
     // पुराने Orders निकालो
     let orders =
-        JSON.parse(localStorage.getItem("bgmiOrders")) || [];
+        JSON.parse(
+            localStorage.getItem("bgmiOrders")
+        ) || [];
 
 
     // नया Order जोड़ो
     orders.push(order);
 
 
-    // Save Order
+    // Order Save करो
     localStorage.setItem(
         "bgmiOrders",
         JSON.stringify(orders)
     );
 
 
-    // WhatsApp Order
+    // ===============================
+    // WHATSAPP ORDER
+    // ===============================
+
     if (paymentMethod === "WhatsApp") {
 
         const message =
-            "🎮 BGMI UC STORE ORDER%0A%0A" +
 
-            "📦 Item: " + selectedItem + "%0A" +
+            "🎮 BGMI UC STORE ORDER\n\n" +
 
-            "💰 Price: " + selectedPrice + "%0A" +
+            "📦 Item: " +
+            selectedItem + "\n" +
 
-            "🆔 Player ID: " + playerID + "%0A" +
+            "💰 Price: " +
+            selectedPrice + "\n" +
 
-            "👤 Player Name: " + playerName + "%0A" +
+            "🆔 Player ID: " +
+            playerID + "\n" +
 
-            "💳 Payment: WhatsApp%0A%0A" +
+            "👤 Player Name: " +
+            playerName + "\n" +
+
+            "💳 Payment: WhatsApp\n\n" +
 
             "⏳ Status: Pending";
 
 
-        // यहाँ अपना WhatsApp नंबर डालना है
-        const whatsappNumber = "91XXXXXXXXXX";
-
-
         const whatsappURL =
+
             "https://wa.me/" +
+
             whatsappNumber +
+
             "?text=" +
-            message;
+
+            encodeURIComponent(message);
 
 
         window.open(
@@ -209,13 +234,52 @@ function confirmOrder() {
     }
 
 
+    // ===============================
+    // UPI PAYMENT
+    // ===============================
+
+    if (paymentMethod === "UPI") {
+
+        const upiURL =
+
+            "upi://pay?" +
+
+            "pa=" +
+            encodeURIComponent(upiID) +
+
+            "&pn=" +
+            encodeURIComponent("BGMI UC STORE") +
+
+            "&am=" +
+            encodeURIComponent(
+                selectedPrice.replace(/[₹,]/g, "")
+            ) +
+
+            "&cu=INR" +
+
+            "&tn=" +
+            encodeURIComponent(
+                selectedItem +
+                " - Player ID " +
+                playerID
+            );
+
+
+        // UPI App खोलने की कोशिश
+        window.location.href = upiURL;
+
+    }
+
+
     alert(
         "✅ आपका Order सफलतापूर्वक बन गया!\n\n" +
-        "Status: Pending"
+        "📦 Item: " + selectedItem +
+        "\n💰 Price: " + selectedPrice +
+        "\n⏳ Status: Pending"
     );
 
 
-    // Orders दिखाओ
+    // Orders Update
     loadOrders();
 
 
@@ -235,8 +299,15 @@ function loadOrders() {
         document.getElementById("orderList");
 
 
+    if (!orderList) {
+        return;
+    }
+
+
     let orders =
-        JSON.parse(localStorage.getItem("bgmiOrders")) || [];
+        JSON.parse(
+            localStorage.getItem("bgmiOrders")
+        ) || [];
 
 
     // कोई Order नहीं
@@ -254,61 +325,65 @@ function loadOrders() {
     orderList.innerHTML = "";
 
 
-    orders.reverse().forEach(function(order) {
+    // नए Order पहले दिखेंगे
+    orders
+        .slice()
+        .reverse()
+        .forEach(function(order) {
 
-        const orderCard =
-            document.createElement("div");
-
-
-        orderCard.style.background =
-            "#211330";
-
-        orderCard.style.padding =
-            "15px";
-
-        orderCard.style.marginBottom =
-            "12px";
-
-        orderCard.style.borderRadius =
-            "12px";
+            const orderCard =
+                document.createElement("div");
 
 
-        orderCard.innerHTML =
+            orderCard.style.background =
+                "#211330";
 
-            "<h3>📦 " +
-            order.item +
-            "</h3>" +
+            orderCard.style.padding =
+                "15px";
 
-            "<p>💰 Price: " +
-            order.price +
-            "</p>" +
+            orderCard.style.marginBottom =
+                "12px";
 
-            "<p>🆔 Player ID: " +
-            order.playerID +
-            "</p>" +
-
-            "<p>👤 Player Name: " +
-            order.playerName +
-            "</p>" +
-
-            "<p>💳 Payment: " +
-            order.payment +
-            "</p>" +
-
-            "<p>📅 Date: " +
-            order.date +
-            "</p>" +
-
-            "<p>⏳ Status: " +
-            order.status +
-            "</p>";
+            orderCard.style.borderRadius =
+                "12px";
 
 
-        orderList.appendChild(
-            orderCard
-        );
+            orderCard.innerHTML =
 
-    });
+                "<h3>📦 " +
+                order.item +
+                "</h3>" +
+
+                "<p>💰 Price: " +
+                order.price +
+                "</p>" +
+
+                "<p>🆔 Player ID: " +
+                order.playerID +
+                "</p>" +
+
+                "<p>👤 Player Name: " +
+                order.playerName +
+                "</p>" +
+
+                "<p>💳 Payment: " +
+                order.payment +
+                "</p>" +
+
+                "<p>📅 Date: " +
+                order.date +
+                "</p>" +
+
+                "<p>⏳ Status: " +
+                order.status +
+                "</p>";
+
+
+            orderList.appendChild(
+                orderCard
+            );
+
+        });
 
 }
 
@@ -319,19 +394,20 @@ function loadOrders() {
 
 function contactWhatsApp() {
 
-    // यहाँ अपना WhatsApp नंबर डालना है
-    const whatsappNumber =
-        "91XXXXXXXXXX";
-
-
     const message =
-        "Hello BGMI UC STORE, मुझे Support चाहिए।";
+
+        "Hello BGMI UC STORE, " +
+        "मुझे Support चाहिए।";
 
 
     const url =
+
         "https://wa.me/" +
+
         whatsappNumber +
+
         "?text=" +
+
         encodeURIComponent(message);
 
 
