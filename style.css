@@ -1,0 +1,594 @@
+/* =========================================
+   RESET / BASIC
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+body {
+    font-family:
+        Arial,
+        "Noto Sans Devanagari",
+        "Nirmala UI",
+        sans-serif;
+
+    background: #000;
+}
+
+
+/* =========================================
+   MAIN ARENA
+========================================= */
+
+.arena {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    min-width: 320px;
+    min-height: 480px;
+
+    overflow: hidden;
+
+    display: flex;
+}
+
+
+/* =========================================
+   CLICKABLE SIDE
+========================================= */
+
+.side {
+    position: relative;
+
+    width: 50%;
+    height: 100%;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        filter 0.15s ease;
+}
+
+.side:hover {
+    filter: brightness(1.04);
+}
+
+
+/* =========================================
+   LEFT — PINK
+========================================= */
+
+.left-side {
+    background:
+        linear-gradient(
+            135deg,
+            #ff1b72 0%,
+            #f00067 48%,
+            #df005b 100%
+        );
+}
+
+
+/* =========================================
+   RIGHT — YELLOW
+========================================= */
+
+.right-side {
+    background:
+        linear-gradient(
+            135deg,
+            #fff000 0%,
+            #ffe500 50%,
+            #ffc900 100%
+        );
+}
+
+
+/* =========================================
+   CENTER WHITE LINE
+========================================= */
+
+.center-line {
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    width: 5px;
+    height: 100%;
+
+    transform: translateX(-50%);
+
+    background: #ffffff;
+
+    z-index: 20;
+
+    box-shadow:
+        0 0 8px rgba(255, 255, 255, 0.85);
+}
+
+
+/* =========================================
+   CHANNEL HEADER
+========================================= */
+
+.channel-header {
+    position: absolute;
+
+    top: 18px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding:
+        7px 18px 7px 8px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(45, 35, 25, 0.72);
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
+
+    z-index: 50;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================
+   CHANNEL LOGO
+========================================= */
+
+.channel-logo {
+    width: 58px;
+    height: 58px;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CHANNEL NAME
+========================================= */
+
+.channel-title {
+    color: #ffffff;
+
+    font-size:
+        clamp(
+            18px,
+            2.35vw,
+            38px
+        );
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    text-shadow:
+        0 3px 5px rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================
+   RESET BUTTON
+========================================= */
+
+.reset-button {
+    position: absolute;
+
+    top: 93px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 78px;
+    height: 78px;
+
+    border-radius: 50%;
+
+    border: 4px solid #ffffff;
+
+    background:
+        radial-gradient(
+            circle,
+            #555555 0%,
+            #303030 60%,
+            #151515 100%
+        );
+
+    color: #ffffff;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    z-index: 60;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.4);
+
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease;
+}
+
+.reset-button:hover {
+    filter: brightness(1.12);
+}
+
+.reset-button:active {
+    transform:
+        translateX(-50%)
+        scale(0.90);
+}
+
+
+/* =========================================
+   MAIN NAME
+========================================= */
+
+.main-name {
+    position: absolute;
+
+    top: 36%;
+
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            68px
+        );
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 4px 7px rgba(0, 0, 0, 0.42);
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   RIGHT MAIN NAME — BLACK
+========================================= */
+
+.right-side .main-name {
+    color: #000000;
+
+    text-shadow:
+        0 2px 4px rgba(255, 255, 255, 0.25);
+}
+
+
+/* =========================================
+   SMALL NAME
+========================================= */
+
+.small-name {
+    position: absolute;
+
+    top: 44%;
+
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size:
+        clamp(
+            14px,
+            1.5vw,
+            24px
+        );
+
+    line-height: 1;
+
+    font-weight: 600;
+
+    letter-spacing: 0.3px;
+
+    color:
+        rgba(255, 255, 255, 0.70);
+
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.25);
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   RIGHT SMALL NAME — DARK
+========================================= */
+
+.right-side .small-name {
+    color:
+        rgba(0, 0, 0, 0.55);
+
+    text-shadow: none;
+}
+
+
+/* =========================================
+   BIG COUNTER
+========================================= */
+
+.counter {
+    position: absolute;
+
+    top: 49%;
+
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size:
+        clamp(
+            100px,
+            13vw,
+            200px
+        );
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 7px 12px rgba(0, 0, 0, 0.35);
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    transition:
+        transform 0.15s ease;
+}
+
+
+/* =========================================
+   RIGHT COUNTER — BLACK
+========================================= */
+
+.right-side .counter {
+    color: #000000;
+
+    text-shadow:
+        0 5px 8px rgba(255, 255, 255, 0.25);
+}
+
+
+/* =========================================
+   CROWN
+========================================= */
+
+.crown {
+    position: absolute;
+
+    top: 24%;
+
+    left: 0;
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size:
+        clamp(
+            45px,
+            5vw,
+            85px
+        );
+
+    line-height: 1;
+
+    z-index: 10;
+
+    opacity: 0;
+
+    transform:
+        scale(0.65)
+        translateY(10px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.20s ease,
+        transform 0.20s ease;
+}
+
+
+/* =========================================
+   ACTIVE CROWN
+========================================= */
+
+.crown.active {
+    opacity: 1;
+
+    transform:
+        scale(1)
+        translateY(0);
+
+    animation:
+        crownPulse 1s infinite;
+}
+
+
+/* =========================================
+   VOTE ANIMATION
+========================================= */
+
+.side.vote-animation .counter {
+    animation:
+        counterPop 0.25s ease;
+}
+
+
+/* =========================================
+   COUNTER POP
+========================================= */
+
+@keyframes counterPop {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.14);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+/* =========================================
+   CROWN ANIMATION
+========================================= */
+
+@keyframes crownPulse {
+
+    0% {
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translateY(-5px)
+            scale(1.08);
+    }
+
+    100% {
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .channel-header {
+        top: 8px;
+
+        padding:
+            4px 10px 4px 5px;
+
+        gap: 6px;
+    }
+
+
+    .channel-logo {
+        width: 42px;
+        height: 42px;
+    }
+
+
+    .channel-title {
+        font-size: 16px;
+    }
+
+
+    .reset-button {
+        top: 65px;
+
+        width: 58px;
+        height: 58px;
+
+        border-width: 3px;
+
+        font-size: 10px;
+    }
+
+
+    .main-name {
+        top: 37%;
+
+        font-size: 20px;
+    }
+
+
+    .small-name {
+        top: 44%;
+
+        font-size: 11px;
+    }
+
+
+    .counter {
+        top: 51%;
+
+        font-size: 75px;
+    }
+
+
+    .crown {
+        top: 27%;
+
+        font-size: 44px;
+    }
+}
