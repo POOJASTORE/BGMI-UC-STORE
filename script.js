@@ -1,66 +1,75 @@
-/* =========================================
+/* =====================================================
    GOAT ARENA LIVE
-   ========================================= */
-
-
-/* ==============================
-   VOTE COUNTERS
-============================== */
+   ===================================================== */
 
 let modiVotes = 0;
 let rahulVotes = 0;
 
+let fullscreenStarted = false;
 
-/* ==============================
+
+/* =====================================================
    ELEMENTS
-============================== */
+   ===================================================== */
 
-const modiSide = document.getElementById("modiSide");
-const rahulSide = document.getElementById("rahulSide");
+const modiSide =
+    document.getElementById("modiSide");
 
-const modiCounter = document.getElementById("modiCounter");
-const rahulCounter = document.getElementById("rahulCounter");
+const rahulSide =
+    document.getElementById("rahulSide");
 
-const modiCrown = document.getElementById("modiCrown");
-const rahulCrown = document.getElementById("rahulCrown");
+const modiCounter =
+    document.getElementById("modiCounter");
 
-const resetButton = document.getElementById("resetButton");
-const fullscreenButton = document.getElementById("fullscreenButton");
+const rahulCounter =
+    document.getElementById("rahulCounter");
+
+const modiCrown =
+    document.getElementById("modiCrown");
+
+const rahulCrown =
+    document.getElementById("rahulCrown");
+
+const resetButton =
+    document.getElementById("resetButton");
 
 
-/* ==============================
-   SPEECH
-============================== */
-
-const speech = window.speechSynthesis;
+/* =====================================================
+   VOICE
+   ===================================================== */
 
 let hindiVoice = null;
 
 
-function loadHindiVoice() {
+function loadVoices() {
 
-    const voices = speech.getVoices();
+    const voices =
+        window.speechSynthesis.getVoices();
 
     hindiVoice =
         voices.find(
             voice =>
                 voice.lang &&
-                voice.lang.toLowerCase().startsWith("hi")
+                voice.lang
+                    .toLowerCase()
+                    .startsWith("hi")
         ) || null;
 }
 
 
-loadHindiVoice();
+loadVoices();
 
 
-if ("onvoiceschanged" in speech) {
-    speech.onvoiceschanged = loadHindiVoice;
+if ("onvoiceschanged" in speechSynthesis) {
+
+    speechSynthesis.onvoiceschanged =
+        loadVoices;
 }
 
 
-/* ==============================
-   SPEAK NAME
-============================== */
+/* =====================================================
+   SPEAK
+   ===================================================== */
 
 function speakName(name) {
 
@@ -68,7 +77,7 @@ function speakName(name) {
         return;
     }
 
-    speech.cancel();
+    speechSynthesis.cancel();
 
     const utterance =
         new SpeechSynthesisUtterance(name);
@@ -76,33 +85,34 @@ function speakName(name) {
     utterance.lang = "hi-IN";
 
     if (hindiVoice) {
-        utterance.voice = hindiVoice;
+
+        utterance.voice =
+            hindiVoice;
     }
 
     utterance.rate = 0.85;
     utterance.pitch = 1;
     utterance.volume = 1;
 
-    speech.speak(utterance);
+    speechSynthesis.speak(utterance);
 }
 
 
-/* ==============================
-   NUMBER FORMAT
-============================== */
+/* =====================================================
+   NUMBER
+   ===================================================== */
 
 function formatNumber(number) {
 
     return String(number).padStart(2, "0");
-
 }
 
 
-/* ==============================
-   UPDATE COUNTERS
-============================== */
+/* =====================================================
+   UPDATE SCREEN
+   ===================================================== */
 
-function updateCounters() {
+function updateScreen() {
 
     modiCounter.textContent =
         formatNumber(modiVotes);
@@ -110,16 +120,9 @@ function updateCounters() {
     rahulCounter.textContent =
         formatNumber(rahulVotes);
 
-}
-
-
-/* ==============================
-   UPDATE CROWN
-============================== */
-
-function updateCrown() {
 
     modiCrown.classList.remove("active");
+
     rahulCrown.classList.remove("active");
 
 
@@ -128,23 +131,19 @@ function updateCrown() {
         modiCrown.classList.add("active");
 
     }
-
     else if (rahulVotes > modiVotes) {
 
         rahulCrown.classList.add("active");
 
     }
-
-    // बराबर होने पर दोनों crown hidden रहेंगे
-
 }
 
 
-/* ==============================
-   COUNTER ANIMATION
-============================== */
+/* =====================================================
+   POP ANIMATION
+   ===================================================== */
 
-function animateCounter(element) {
+function popCounter(element) {
 
     element.classList.remove("pop");
 
@@ -156,170 +155,186 @@ function animateCounter(element) {
 
         element.classList.remove("pop");
 
-    }, 140);
-
+    }, 120);
 }
 
 
-/* ==============================
-   UPDATE SCREEN
-============================== */
-
-function updateScreen() {
-
-    updateCounters();
-
-    updateCrown();
-
-}
-
-
-/* ==============================
-   MODI CLICK
-============================== */
-
-modiSide.addEventListener("click", function () {
-
-    modiVotes++;
-
-    updateScreen();
-
-    animateCounter(modiCounter);
-
-    speakName("नरेंद्र मोदी");
-
-});
-
-
-/* ==============================
-   RAHUL CLICK
-============================== */
-
-rahulSide.addEventListener("click", function () {
-
-    rahulVotes++;
-
-    updateScreen();
-
-    animateCounter(rahulCounter);
-
-    speakName("राहुल गांधी");
-
-});
-
-
-/* ==============================
-   RESET
-============================== */
-
-resetButton.addEventListener("click", function (event) {
-
-    event.stopPropagation();
-
-    modiVotes = 0;
-    rahulVotes = 0;
-
-    speech.cancel();
-
-    updateScreen();
-
-});
-
-
-/* ==============================
-   FULLSCREEN
-============================== */
+/* =====================================================
+   ENTER FULLSCREEN
+   ===================================================== */
 
 async function enterFullscreen() {
 
-    const element = document.documentElement;
+    if (document.fullscreenElement) {
+        return;
+    }
 
 
     try {
 
-        if (document.fullscreenElement) {
+        if (
+            document.documentElement
+                .requestFullscreen
+        ) {
 
-            await document.exitFullscreen();
-
-            return;
-
-        }
-
-
-        if (element.requestFullscreen) {
-
-            await element.requestFullscreen();
-
-        }
-
-        else if (element.webkitRequestFullscreen) {
-
-            element.webkitRequestFullscreen();
+            await document.documentElement
+                .requestFullscreen();
 
         }
 
     }
-
     catch (error) {
 
         console.log(
-            "Fullscreen request failed:",
+            "Fullscreen request:",
             error
         );
-
     }
-
 }
 
 
-/* ==============================
-   FULLSCREEN BUTTON
-============================== */
+/* =====================================================
+   LOCK LANDSCAPE WHEN POSSIBLE
+   ===================================================== */
 
-fullscreenButton.addEventListener(
+async function lockLandscape() {
+
+    try {
+
+        if (
+            screen.orientation &&
+            screen.orientation.lock
+        ) {
+
+            await screen.orientation
+                .lock("landscape");
+
+        }
+
+    }
+    catch (error) {
+
+        // Chrome normal tabs may reject this.
+        // Installed PWA/fullscreen can allow it.
+    }
+}
+
+
+/* =====================================================
+   FIRST USER ACTION
+   ===================================================== */
+
+async function startDisplayMode() {
+
+    if (fullscreenStarted) {
+        return;
+    }
+
+    fullscreenStarted = true;
+
+    await enterFullscreen();
+
+    await lockLandscape();
+}
+
+
+/* =====================================================
+   MODI
+   ===================================================== */
+
+modiSide.addEventListener(
+    "click",
+    async function () {
+
+        await startDisplayMode();
+
+        modiVotes++;
+
+        updateScreen();
+
+        popCounter(modiCounter);
+
+        speakName("नरेंद्र मोदी");
+    }
+);
+
+
+/* =====================================================
+   RAHUL
+   ===================================================== */
+
+rahulSide.addEventListener(
+    "click",
+    async function () {
+
+        await startDisplayMode();
+
+        rahulVotes++;
+
+        updateScreen();
+
+        popCounter(rahulCounter);
+
+        speakName("राहुल गांधी");
+    }
+);
+
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+resetButton.addEventListener(
     "click",
     function (event) {
 
         event.stopPropagation();
 
-        enterFullscreen();
+        modiVotes = 0;
 
+        rahulVotes = 0;
+
+        speechSynthesis.cancel();
+
+        updateScreen();
     }
 );
 
 
-/* ==============================
-   UPDATE BUTTON TEXT
-============================== */
+/* =====================================================
+   ROTATION
+   ===================================================== */
 
-function updateFullscreenButton() {
+window.addEventListener(
+    "orientationchange",
+    function () {
 
-    if (document.fullscreenElement) {
+        /*
+         * Browser security may reject fullscreen
+         * without a user gesture.
+         *
+         * If already fullscreen, layout automatically
+         * fills the new orientation.
+         */
 
-        fullscreenButton.textContent =
-            "⛶ EXIT FULL SCREEN";
+        setTimeout(() => {
 
+            if (document.fullscreenElement) {
+
+                document.documentElement
+                    .style.width = "100vw";
+
+                document.documentElement
+                    .style.height = "100vh";
+            }
+
+        }, 100);
     }
-
-    else {
-
-        fullscreenButton.textContent =
-            "⛶ FULL SCREEN";
-
-    }
-
-}
-
-
-document.addEventListener(
-    "fullscreenchange",
-    updateFullscreenButton
 );
 
 
-/* ==============================
-   INITIAL SCREEN
-============================== */
+/* =====================================================
+   INITIAL
+   ===================================================== */
 
 updateScreen();
-updateFullscreenButton();
