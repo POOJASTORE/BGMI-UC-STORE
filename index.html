@@ -1,116 +1,59 @@
 <!DOCTYPE html>
 <html lang="hi">
-
 <head>
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
-        content="width=device-width, initial-scale=1.0"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
     >
+
+    <meta name="theme-color" content="#000000">
 
     <title>GOAT ARENA LIVE</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div class="arena">
+    <main id="gameScreen" class="game-screen">
 
-        <!-- =========================
-             LEFT SIDE — NARENDRA MODI
-        ========================== -->
+        <!-- LEFT: NARENDRA MODI -->
+        <section id="modiSide" class="side left-side">
 
-        <section
-            class="side left-side"
-            id="modiSide"
-        >
+            <div id="modiCrown" class="crown">👑</div>
 
-            <!-- Crown -->
-            <div
-                class="crown"
-                id="modiCrown"
-            >
-                👑
-            </div>
+            <div class="main-name">नरेंद्र मोदी</div>
 
-            <!-- Main Name -->
-            <div class="main-name">
-                नरेंद्र मोदी
-            </div>
+            <div class="small-name">नरेंद्र मोदी</div>
 
-            <!-- Small Name -->
-            <div class="small-name">
-                नरेंद्र मोदी
-            </div>
-
-            <!-- Live Counter -->
-            <div
-                class="counter"
-                id="modiCounter"
-            >
-                00
-            </div>
+            <div id="modiCounter" class="counter">00</div>
 
         </section>
 
 
-        <!-- =========================
-             RIGHT SIDE — RAHUL GANDHI
-        ========================== -->
+        <!-- RIGHT: RAHUL GANDHI -->
+        <section id="rahulSide" class="side right-side">
 
-        <section
-            class="side right-side"
-            id="rahulSide"
-        >
+            <div id="rahulCrown" class="crown">👑</div>
 
-            <!-- Crown -->
-            <div
-                class="crown"
-                id="rahulCrown"
-            >
-                👑
-            </div>
+            <div class="main-name">राहुल गांधी</div>
 
-            <!-- Main Name -->
-            <div class="main-name">
-                राहुल गांधी
-            </div>
+            <div class="small-name">राहुल गांधी</div>
 
-            <!-- Small Name -->
-            <div class="small-name">
-                राहुल गांधी
-            </div>
-
-            <!-- Live Counter -->
-            <div
-                class="counter"
-                id="rahulCounter"
-            >
-                00
-            </div>
+            <div id="rahulCounter" class="counter">00</div>
 
         </section>
 
 
-        <!-- =========================
-             CENTER DIVIDER
-        ========================== -->
-
+        <!-- CENTER LINE -->
         <div class="center-line"></div>
 
 
-        <!-- =========================
-             CHANNEL HEADER
-        ========================== -->
-
+        <!-- CHANNEL HEADER -->
         <div class="channel-header">
 
-            <!-- अपनी channel logo PNG -->
             <img
                 src="logo.png"
                 class="channel-logo"
@@ -124,24 +67,20 @@
         </div>
 
 
-        <!-- =========================
-             RESET BUTTON
-        ========================== -->
-
-        <button
-            type="button"
-            class="reset-button"
-            id="resetButton"
-        >
+        <!-- RESET -->
+        <button id="resetButton" class="reset-button">
             RESET
         </button>
 
-    </div>
 
+        <!-- FULLSCREEN -->
+        <button id="fullscreenButton" class="fullscreen-button">
+            ⛶ FULL SCREEN
+        </button>
 
-    <!-- JavaScript -->
+    </main>
+
     <script src="script.js"></script>
 
 </body>
-
 </html>
