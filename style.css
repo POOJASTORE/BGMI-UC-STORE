@@ -1,42 +1,31 @@
-/* ==============================
-   BASIC RESET
-============================== */
+/* =====================================================
+   GOAT ARENA LIVE
+   ===================================================== */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
     -webkit-tap-highlight-color: transparent;
 }
+
+
+/* =====================================================
+   PAGE
+   ===================================================== */
 
 html,
 body {
     width: 100%;
     height: 100%;
+
+    margin: 0;
+    padding: 0;
+
     overflow: hidden;
+
     background: #000;
-}
-
-
-/* ==============================
-   FULL SCREEN GAME AREA
-============================== */
-
-.game-screen {
-    position: fixed;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    width: 100vw;
-    height: 100dvh;
-
-    min-height: 100dvh;
-
-    display: flex;
-
-    overflow: hidden;
 
     touch-action: manipulation;
 
@@ -45,24 +34,45 @@ body {
 }
 
 
-/* ==============================
-   50 / 50 SIDES
-============================== */
+/* =====================================================
+   MAIN ARENA
+   ===================================================== */
 
-.side {
+#arena {
+
+    position: fixed;
+
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    width: 100dvw;
+    height: 100dvh;
+
+    display: flex;
+
+    overflow: hidden;
+
+    background: #000;
+}
+
+
+/* =====================================================
+   LEFT + RIGHT
+   EXACT 50 / 50
+   ===================================================== */
+
+.vote-side {
+
     position: relative;
 
     width: 50%;
     flex: 0 0 50%;
 
     height: 100%;
-    min-height: 100%;
 
     overflow: hidden;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
     cursor: pointer;
 
@@ -70,45 +80,48 @@ body {
 }
 
 
-/* ==============================
-   LEFT SIDE
-============================== */
+/* =====================================================
+   MODI SIDE
+   ===================================================== */
 
-.left-side {
+.modi-side {
+
     background:
         linear-gradient(
             180deg,
-            #ff2b7a 0%,
-            #f50068 50%,
-            #df005b 100%
+            #ff2b7c 0%,
+            #f90069 48%,
+            #e80060 100%
         );
 
-    color: white;
+    color: #ffffff;
 }
 
 
-/* ==============================
-   RIGHT SIDE
-============================== */
+/* =====================================================
+   RAHUL SIDE
+   ===================================================== */
 
-.right-side {
+.rahul-side {
+
     background:
         linear-gradient(
             180deg,
-            #fff51a 0%,
-            #ffe500 50%,
-            #ffc400 100%
+            #fff500 0%,
+            #ffe900 50%,
+            #ffd000 100%
         );
 
-    color: #000;
+    color: #000000;
 }
 
 
-/* ==============================
+/* =====================================================
    CENTER DIVIDER
-============================== */
+   ===================================================== */
 
-.center-line {
+.center-divider {
+
     position: absolute;
 
     top: 0;
@@ -116,11 +129,11 @@ body {
 
     left: 50%;
 
-    width: 3px;
+    width: 5px;
 
     transform: translateX(-50%);
 
-    background: rgba(255, 255, 255, 0.95);
+    background: #ffffff;
 
     z-index: 20;
 
@@ -128,46 +141,62 @@ body {
 }
 
 
-/* ==============================
+/* =====================================================
    CHANNEL HEADER
-============================== */
+   Screenshot-style
+   ===================================================== */
 
 .channel-header {
+
     position: absolute;
 
-    top: max(10px, env(safe-area-inset-top));
-
+    top: 20px;
     left: 50%;
 
     transform: translateX(-50%);
 
-    z-index: 50;
+    height: 92px;
+
+    min-width: 525px;
+
+    padding: 0 30px;
 
     display: flex;
 
     align-items: center;
     justify-content: center;
 
-    gap: 10px;
+    gap: 18px;
 
-    padding: 8px 16px;
+    border-radius: 60px;
 
-    border-radius: 40px;
+    background:
+        linear-gradient(
+            100deg,
+            rgba(55, 0, 25, 0.97),
+            rgba(40, 5, 20, 0.96),
+            rgba(60, 60, 0, 0.94)
+        );
 
-    background: rgba(0, 0, 0, 0.72);
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.22);
 
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-
-    white-space: nowrap;
+    z-index: 100;
 
     pointer-events: none;
 }
 
 
+/* =====================================================
+   LOGO
+   ===================================================== */
+
 .channel-logo {
-    width: 48px;
-    height: 48px;
+
+    width: 68px;
+    height: 68px;
+
+    flex: 0 0 68px;
 
     border-radius: 50%;
 
@@ -177,141 +206,95 @@ body {
 }
 
 
-.channel-title {
-    color: #fff;
+/* =====================================================
+   CHANNEL NAME
+   ===================================================== */
+
+.channel-name {
+
+    color: #ffffff;
 
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
-    font-size: clamp(14px, 2.5vw, 24px);
+    font-size: 30px;
 
-    font-weight: 900;
+    font-weight: 800;
 
-    letter-spacing: 0.5px;
+    line-height: 1;
+
+    white-space: nowrap;
+
+    letter-spacing: 0;
 }
 
 
-/* ==============================
-   CROWN
-============================== */
+/* =====================================================
+   RESET
+   ===================================================== */
 
-.crown {
+.reset-button {
+
     position: absolute;
 
-    top: 24%;
-
+    top: 150px;
     left: 50%;
 
-    transform:
-        translateX(-50%)
-        scale(0.7);
+    transform: translateX(-50%);
 
-    font-size: clamp(30px, 7vw, 70px);
+    width: 112px;
+    height: 112px;
 
-    opacity: 0;
+    border: none;
 
-    visibility: hidden;
+    border-radius: 50%;
 
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
+    background: #181219;
 
-    z-index: 10;
-
-    pointer-events: none;
-}
-
-
-.crown.active {
-    opacity: 1;
-
-    visibility: visible;
-
-    transform:
-        translateX(-50%)
-        scale(1);
-
-    animation: crownPulse 0.8s infinite alternate;
-}
-
-
-@keyframes crownPulse {
-
-    from {
-        transform:
-            translateX(-50%)
-            scale(0.95);
-    }
-
-    to {
-        transform:
-            translateX(-50%)
-            scale(1.08);
-    }
-
-}
-
-
-/* ==============================
-   MAIN NAMES
-============================== */
-
-.main-name {
-    position: absolute;
-
-    top: 35%;
-
-    left: 10%;
-    right: 10%;
-
-    text-align: center;
+    color: #ffffff;
 
     font-family:
         Arial,
-        "Noto Sans Devanagari",
+        Helvetica,
         sans-serif;
 
-    font-size: clamp(22px, 4.5vw, 52px);
+    font-size: 21px;
 
     font-weight: 900;
 
-    line-height: 1.1;
+    z-index: 110;
 
-    z-index: 5;
+    cursor: pointer;
 
-    pointer-events: none;
+    touch-action: manipulation;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.18);
 }
 
 
-.left-side .main-name {
-    color: #fff;
+.reset-button:active {
 
-    text-shadow:
-        0 3px 10px rgba(0, 0, 0, 0.25);
+    transform:
+        translateX(-50%)
+        scale(0.92);
 }
 
 
-.right-side .main-name {
-    color: #000;
+/* =====================================================
+   PERSON NAME
+   ===================================================== */
 
-    text-shadow:
-        0 3px 10px rgba(255, 255, 255, 0.25);
-}
+.person-name {
 
-
-/* ==============================
-   SMALL NAME
-============================== */
-
-.small-name {
     position: absolute;
 
-    top: 43%;
+    top: 34%;
 
-    left: 10%;
-    right: 10%;
+    left: 4%;
+    right: 4%;
 
     text-align: center;
 
@@ -320,11 +303,12 @@ body {
         "Noto Sans Devanagari",
         sans-serif;
 
-    font-size: clamp(14px, 2.5vw, 28px);
+    font-size:
+        clamp(30px, 4.4vw, 60px);
 
-    font-weight: 700;
+    font-weight: 900;
 
-    opacity: 0.45;
+    line-height: 1.08;
 
     z-index: 5;
 
@@ -332,27 +316,36 @@ body {
 }
 
 
-.left-side .small-name {
-    color: #fff;
+.modi-side .person-name {
+
+    color: #ffffff;
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.18);
 }
 
 
-.right-side .small-name {
-    color: #000;
+.rahul-side .person-name {
+
+    color: #000000;
+
+    text-shadow:
+        0 2px 4px rgba(255, 255, 255, 0.12);
 }
 
 
-/* ==============================
-   COUNTERS
-============================== */
+/* =====================================================
+   COUNTER
+   ===================================================== */
 
-.counter {
+.vote-counter {
+
     position: absolute;
 
     top: 50%;
 
-    left: 5%;
-    right: 5%;
+    left: 0;
+    right: 0;
 
     text-align: center;
 
@@ -361,13 +354,14 @@ body {
         Helvetica,
         sans-serif;
 
-    font-size: clamp(55px, 13vw, 150px);
+    font-size:
+        clamp(80px, 12vw, 175px);
 
     font-weight: 900;
 
     line-height: 1;
 
-    letter-spacing: -2px;
+    letter-spacing: -5px;
 
     z-index: 5;
 
@@ -378,234 +372,280 @@ body {
 }
 
 
-.left-side .counter {
-    color: #fff;
+.modi-side .vote-counter {
 
-    text-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
 }
 
 
-.right-side .counter {
-    color: #000;
+.rahul-side .vote-counter {
 
-    text-shadow:
-        0 5px 15px rgba(255, 255, 255, 0.25);
+    color: #000000;
 }
 
 
-/* Counter click animation */
+/* =====================================================
+   COUNTER POP
+   ===================================================== */
 
-.counter.pop {
-    transform: scale(1.12);
+.vote-counter.pop {
+
+    transform: scale(1.08);
 }
 
 
-/* ==============================
-   RESET BUTTON
-============================== */
+/* =====================================================
+   CROWN
+   ===================================================== */
 
-.reset-button {
+.crown {
+
     position: absolute;
 
-    top: 105px;
+    top: 23%;
 
     left: 50%;
 
-    transform: translateX(-50%);
-
-    z-index: 100;
-
-    width: 76px;
-    height: 76px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background: rgba(20, 20, 20, 0.92);
-
-    color: #fff;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 12px;
-
-    font-weight: 900;
-
-    letter-spacing: 0.5px;
-
-    box-shadow:
-        0 5px 20px rgba(0, 0, 0, 0.35);
-
-    cursor: pointer;
-
-    touch-action: manipulation;
-}
-
-
-.reset-button:active {
     transform:
         translateX(-50%)
-        scale(0.92);
+        scale(0.75);
+
+    font-size:
+        clamp(35px, 6vw, 75px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    z-index: 8;
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease;
 }
 
 
-/* ==============================
-   FULLSCREEN BUTTON
-============================== */
+.crown.active {
 
-.fullscreen-button {
-    position: absolute;
+    opacity: 1;
 
-    bottom: max(14px, env(safe-area-inset-bottom));
+    visibility: visible;
 
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    z-index: 100;
-
-    border: 0;
-
-    border-radius: 30px;
-
-    padding: 11px 18px;
-
-    background: rgba(0, 0, 0, 0.82);
-
-    color: #fff;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 13px;
-
-    font-weight: 900;
-
-    white-space: nowrap;
-
-    box-shadow:
-        0 4px 15px rgba(0, 0, 0, 0.3);
-
-    cursor: pointer;
-
-    touch-action: manipulation;
-}
-
-
-.fullscreen-button:active {
     transform:
         translateX(-50%)
-        scale(0.94);
+        scale(1);
 }
 
 
-/* ==============================
-   FULLSCREEN STATE
-============================== */
+/* =====================================================
+   REAL FULLSCREEN
+   ===================================================== */
 
-:fullscreen .game-screen {
+:fullscreen #arena {
+
+    width: 100vw;
+    height: 100vh;
+
+    width: 100dvw;
+    height: 100dvh;
+}
+
+
+:-webkit-full-screen #arena {
+
     width: 100vw;
     height: 100vh;
 }
 
 
-:-webkit-full-screen .game-screen {
-    width: 100vw;
-    height: 100vh;
-}
-
-
-/* ==============================
+/* =====================================================
    MOBILE
-============================== */
+   ===================================================== */
 
 @media (max-width: 600px) {
 
     .channel-header {
-        top: max(7px, env(safe-area-inset-top));
 
-        padding: 6px 12px;
+        top: 12px;
 
-        gap: 7px;
+        height: 62px;
+
+        min-width: 0;
+
+        width: auto;
+
+        padding: 0 17px;
+
+        gap: 10px;
+
+        border-radius: 40px;
     }
+
 
     .channel-logo {
-        width: 38px;
-        height: 38px;
+
+        width: 44px;
+        height: 44px;
+
+        flex-basis: 44px;
     }
 
-    .channel-title {
+
+    .channel-name {
+
+        font-size: 17px;
+    }
+
+
+    .reset-button {
+
+        top: 88px;
+
+        width: 68px;
+        height: 68px;
+
         font-size: 13px;
     }
 
-    .reset-button {
-        top: 82px;
 
-        width: 62px;
-        height: 62px;
+    .person-name {
 
-        font-size: 10px;
+        top: 35%;
+
+        font-size:
+            clamp(20px, 5.5vw, 35px);
     }
 
-    .fullscreen-button {
-        bottom: max(10px, env(safe-area-inset-bottom));
 
-        padding: 9px 14px;
+    .vote-counter {
+
+        top: 51%;
+
+        font-size:
+            clamp(55px, 18vw, 105px);
+
+        letter-spacing: -3px;
+    }
+
+
+    .crown {
+
+        top: 23%;
+
+        font-size: 42px;
+    }
+}
+
+
+/* =====================================================
+   LANDSCAPE MOBILE
+   ===================================================== */
+
+@media (orientation: landscape) and (max-height: 600px) {
+
+    .channel-header {
+
+        top: 8px;
+
+        height: 55px;
+
+        padding: 0 18px;
+
+        gap: 10px;
+    }
+
+
+    .channel-logo {
+
+        width: 40px;
+        height: 40px;
+
+        flex-basis: 40px;
+    }
+
+
+    .channel-name {
+
+        font-size: 16px;
+    }
+
+
+    .reset-button {
+
+        top: 70px;
+
+        width: 58px;
+        height: 58px;
 
         font-size: 11px;
     }
 
-    .main-name {
-        top: 35%;
 
-        font-size: clamp(18px, 5vw, 32px);
+    .person-name {
+
+        top: 34%;
+
+        font-size:
+            clamp(24px, 4.5vw, 48px);
     }
 
-    .small-name {
-        top: 43%;
 
-        font-size: clamp(12px, 3vw, 20px);
+    .vote-counter {
+
+        top: 49%;
+
+        font-size:
+            clamp(65px, 12vw, 130px);
     }
 
-    .counter {
-        top: 50%;
-
-        font-size: clamp(50px, 17vw, 100px);
-    }
 
     .crown {
-        top: 23%;
 
-        font-size: clamp(28px, 10vw, 55px);
+        top: 20%;
+
+        font-size: 42px;
     }
-
 }
 
 
-/* ==============================
-   VERY SMALL PHONES
-============================== */
+/* =====================================================
+   VERY SHORT LANDSCAPE
+   ===================================================== */
 
-@media (max-height: 600px) {
+@media (orientation: landscape) and (max-height: 450px) {
 
-    .main-name {
-        top: 34%;
+    .channel-header {
+
+        top: 5px;
+
+        height: 48px;
     }
 
-    .small-name {
-        top: 42%;
+
+    .channel-logo {
+
+        width: 35px;
+        height: 35px;
+
+        flex-basis: 35px;
     }
 
-    .counter {
-        top: 49%;
+
+    .channel-name {
+
+        font-size: 14px;
     }
+
 
     .reset-button {
-        top: 78px;
 
-        width: 58px;
-        height: 58px;
+        top: 58px;
+
+        width: 52px;
+        height: 52px;
+
+        font-size: 10px;
     }
-
 }
