@@ -1,115 +1,1096 @@
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
+
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width,
-                   initial-scale=1,
-                   maximum-scale=1,
-                   user-scalable=no,
-                   viewport-fit=cover">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    >
 
     <meta name="theme-color" content="#000000">
 
-    <!-- Android PWA -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent">
-
     <title>GOAT ARENA LIVE</title>
 
-    <link rel="manifest" href="manifest.json">
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        /* =========================================
+           BASIC RESET
+        ========================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            -webkit-tap-highlight-color: transparent;
+        }
+
+
+        html,
+        body {
+
+            width: 100%;
+            height: 100%;
+
+            overflow: hidden;
+
+            margin: 0;
+            padding: 0;
+
+            background: #000;
+
+            touch-action: manipulation;
+
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+
+        body {
+
+            position: fixed;
+
+            inset: 0;
+        }
+
+
+        /* =========================================
+           MAIN ARENA
+        ========================================= */
+
+        #arena {
+
+            position: fixed;
+
+            inset: 0;
+
+            width: 100vw;
+            height: 100vh;
+
+            width: 100dvw;
+            height: 100dvh;
+
+            display: flex;
+
+            overflow: hidden;
+
+            background: #000;
+        }
+
+
+        /* =========================================
+           50 / 50 SIDES
+        ========================================= */
+
+        .vote-side {
+
+            position: relative;
+
+            width: 50%;
+            flex: 0 0 50%;
+
+            height: 100%;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            touch-action: manipulation;
+        }
+
+
+        /* =========================================
+           LEFT PINK
+        ========================================= */
+
+        .modi-side {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #ff2b7c 0%,
+                    #f90069 50%,
+                    #e80060 100%
+                );
+
+            color: #fff;
+        }
+
+
+        /* =========================================
+           RIGHT YELLOW
+        ========================================= */
+
+        .rahul-side {
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #fff500 0%,
+                    #ffe900 50%,
+                    #ffd000 100%
+                );
+
+            color: #000;
+        }
+
+
+        /* =========================================
+           CENTER LINE
+        ========================================= */
+
+        .center-divider {
+
+            position: absolute;
+
+            top: 0;
+            bottom: 0;
+
+            left: 50%;
+
+            width: 5px;
+
+            transform: translateX(-50%);
+
+            background: #fff;
+
+            z-index: 20;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           CHANNEL HEADER
+        ========================================= */
+
+        .channel-header {
+
+            position: absolute;
+
+            top: 20px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            height: 92px;
+
+            padding: 0 30px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 18px;
+
+            border-radius: 60px;
+
+            background:
+                linear-gradient(
+                    100deg,
+                    rgba(55, 0, 25, 0.97),
+                    rgba(40, 5, 20, 0.96),
+                    rgba(60, 60, 0, 0.94)
+                );
+
+            z-index: 100;
+
+            white-space: nowrap;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           LOGO
+        ========================================= */
+
+        .channel-logo {
+
+            width: 68px;
+            height: 68px;
+
+            flex: 0 0 68px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            display: block;
+        }
+
+
+        /* =========================================
+           CHANNEL NAME
+        ========================================= */
+
+        .channel-name {
+
+            color: #fff;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+            line-height: 1;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================
+           RESET BUTTON
+        ========================================= */
+
+        #resetButton {
+
+            position: absolute;
+
+            top: 150px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: 112px;
+            height: 112px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background: #181219;
+
+            color: #fff;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size: 21px;
+
+            font-weight: 900;
+
+            z-index: 110;
+
+            cursor: pointer;
+
+            touch-action: manipulation;
+        }
+
+
+        #resetButton:active {
+
+            transform:
+                translateX(-50%)
+                scale(0.92);
+        }
+
+
+        /* =========================================
+           PERSON NAMES
+        ========================================= */
+
+        .person-name {
+
+            position: absolute;
+
+            top: 34%;
+
+            left: 4%;
+            right: 4%;
+
+            text-align: center;
+
+            font-family:
+                Arial,
+                "Noto Sans Devanagari",
+                sans-serif;
+
+            font-size:
+                clamp(30px, 4.4vw, 60px);
+
+            font-weight: 900;
+
+            line-height: 1.08;
+
+            z-index: 5;
+
+            pointer-events: none;
+        }
+
+
+        .modi-side .person-name {
+
+            color: #fff;
+
+            text-shadow:
+                0 2px 5px rgba(0, 0, 0, 0.18);
+        }
+
+
+        .rahul-side .person-name {
+
+            color: #000;
+
+            text-shadow:
+                0 2px 4px rgba(255, 255, 255, 0.12);
+        }
+
+
+        /* =========================================
+           COUNTERS
+        ========================================= */
+
+        .vote-counter {
+
+            position: absolute;
+
+            top: 50%;
+
+            left: 0;
+            right: 0;
+
+            text-align: center;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            font-size:
+                clamp(80px, 12vw, 175px);
+
+            font-weight: 900;
+
+            line-height: 1;
+
+            letter-spacing: -5px;
+
+            z-index: 5;
+
+            pointer-events: none;
+
+            transition:
+                transform 0.12s ease;
+        }
+
+
+        .modi-side .vote-counter {
+
+            color: #fff;
+        }
+
+
+        .rahul-side .vote-counter {
+
+            color: #000;
+        }
+
+
+        .vote-counter.pop {
+
+            transform: scale(1.08);
+        }
+
+
+        /* =========================================
+           CROWN
+        ========================================= */
+
+        .crown {
+
+            position: absolute;
+
+            top: 23%;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%)
+                scale(0.75);
+
+            font-size:
+                clamp(35px, 6vw, 75px);
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            z-index: 8;
+
+            pointer-events: none;
+
+            transition:
+                opacity 0.15s ease,
+                transform 0.15s ease;
+        }
+
+
+        .crown.active {
+
+            opacity: 1;
+
+            visibility: visible;
+
+            transform:
+                translateX(-50%)
+                scale(1);
+        }
+
+
+        /* =========================================
+           FULLSCREEN
+        ========================================= */
+
+        :fullscreen #arena {
+
+            width: 100vw;
+            height: 100vh;
+
+            width: 100dvw;
+            height: 100dvh;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 600px) {
+
+            .channel-header {
+
+                top: 12px;
+
+                height: 62px;
+
+                padding: 0 17px;
+
+                gap: 10px;
+
+                border-radius: 40px;
+            }
+
+
+            .channel-logo {
+
+                width: 44px;
+                height: 44px;
+
+                flex-basis: 44px;
+            }
+
+
+            .channel-name {
+
+                font-size: 17px;
+            }
+
+
+            #resetButton {
+
+                top: 88px;
+
+                width: 68px;
+                height: 68px;
+
+                font-size: 13px;
+            }
+
+
+            .person-name {
+
+                top: 35%;
+
+                font-size:
+                    clamp(20px, 5.5vw, 35px);
+            }
+
+
+            .vote-counter {
+
+                top: 51%;
+
+                font-size:
+                    clamp(55px, 18vw, 105px);
+
+                letter-spacing: -3px;
+            }
+
+
+            .crown {
+
+                top: 23%;
+
+                font-size: 42px;
+            }
+
+        }
+
+
+        /* =========================================
+           LANDSCAPE PHONE
+        ========================================= */
+
+        @media (orientation: landscape) and (max-height: 600px) {
+
+            .channel-header {
+
+                top: 8px;
+
+                height: 55px;
+
+                padding: 0 18px;
+
+                gap: 10px;
+            }
+
+
+            .channel-logo {
+
+                width: 40px;
+                height: 40px;
+
+                flex-basis: 40px;
+            }
+
+
+            .channel-name {
+
+                font-size: 16px;
+            }
+
+
+            #resetButton {
+
+                top: 70px;
+
+                width: 58px;
+                height: 58px;
+
+                font-size: 11px;
+            }
+
+
+            .person-name {
+
+                top: 34%;
+
+                font-size:
+                    clamp(24px, 4.5vw, 48px);
+            }
+
+
+            .vote-counter {
+
+                top: 49%;
+
+                font-size:
+                    clamp(65px, 12vw, 130px);
+            }
+
+
+            .crown {
+
+                top: 20%;
+
+                font-size: 42px;
+            }
+
+        }
+
+
+        /* =========================================
+           VERY SHORT LANDSCAPE
+        ========================================= */
+
+        @media (orientation: landscape) and (max-height: 450px) {
+
+            .channel-header {
+
+                top: 5px;
+
+                height: 48px;
+            }
+
+
+            .channel-logo {
+
+                width: 35px;
+                height: 35px;
+
+                flex-basis: 35px;
+            }
+
+
+            .channel-name {
+
+                font-size: 14px;
+            }
+
+
+            #resetButton {
+
+                top: 58px;
+
+                width: 52px;
+                height: 52px;
+
+                font-size: 10px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<div id="arena">
 
-    <!-- ================= LEFT ================= -->
-
-    <section id="modiSide"
-             class="vote-side modi-side">
-
-        <div id="modiCrown"
-             class="crown">
-            👑
-        </div>
-
-        <div class="person-name">
-            नरेंद्र मोदी
-        </div>
-
-        <div id="modiCounter"
-             class="vote-counter">
-            00
-        </div>
-
-    </section>
+    <div id="arena">
 
 
-    <!-- ================= RIGHT ================= -->
+        <!-- =====================================
+             LEFT SIDE
+        ====================================== -->
 
-    <section id="rahulSide"
-             class="vote-side rahul-side">
-
-        <div id="rahulCrown"
-             class="crown">
-            👑
-        </div>
-
-        <div class="person-name">
-            राहुल गांधी
-        </div>
-
-        <div id="rahulCounter"
-             class="vote-counter">
-            00
-        </div>
-
-    </section>
-
-
-    <!-- CENTER LINE -->
-
-    <div class="center-divider"></div>
-
-
-    <!-- ================= CHANNEL HEADER ================= -->
-
-    <div class="channel-header">
-
-        <img
-            src="logo.png"
-            class="channel-logo"
-            alt="GOAT ARENA LIVE"
+        <section
+            id="modiSide"
+            class="vote-side modi-side"
         >
 
-        <div class="channel-name">
-            GOAT ARENA LIVE
+            <div
+                id="modiCrown"
+                class="crown"
+            >
+                👑
+            </div>
+
+
+            <div class="person-name">
+                नरेंद्र मोदी
+            </div>
+
+
+            <div
+                id="modiCounter"
+                class="vote-counter"
+            >
+                00
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             RIGHT SIDE
+        ====================================== -->
+
+        <section
+            id="rahulSide"
+            class="vote-side rahul-side"
+        >
+
+            <div
+                id="rahulCrown"
+                class="crown"
+            >
+                👑
+            </div>
+
+
+            <div class="person-name">
+                राहुल गांधी
+            </div>
+
+
+            <div
+                id="rahulCounter"
+                class="vote-counter"
+            >
+                00
+            </div>
+
+        </section>
+
+
+        <!-- CENTER -->
+
+        <div class="center-divider"></div>
+
+
+        <!-- =====================================
+             CHANNEL HEADER
+        ====================================== -->
+
+        <div class="channel-header">
+
+            <img
+                src="logo.png"
+                class="channel-logo"
+                alt=""
+            >
+
+            <div class="channel-name">
+                GOAT ARENA LIVE
+            </div>
+
         </div>
+
+
+        <!-- =====================================
+             ONLY BUTTON = RESET
+        ====================================== -->
+
+        <button
+            id="resetButton"
+            type="button"
+        >
+            RESET
+        </button>
+
 
     </div>
 
 
-    <!-- ================= RESET ================= -->
 
-    <button
-        id="resetButton"
-        class="reset-button"
-        type="button">
+    <script>
 
-        RESET
+        /* =========================================
+           VARIABLES
+        ========================================= */
 
-    </button>
+        let modiVotes = 0;
+        let rahulVotes = 0;
 
-</div>
+        let fullscreenStarted = false;
 
 
-<script src="script.js"></script>
+        /* =========================================
+           ELEMENTS
+        ========================================= */
 
-</body>
-</html>
+        const modiSide =
+            document.getElementById("modiSide");
+
+        const rahulSide =
+            document.getElementById("rahulSide");
+
+        const modiCounter =
+            document.getElementById("modiCounter");
+
+        const rahulCounter =
+            document.getElementById("rahulCounter");
+
+        const modiCrown =
+            document.getElementById("modiCrown");
+
+        const rahulCrown =
+            document.getElementById("rahulCrown");
+
+        const resetButton =
+            document.getElementById("resetButton");
+
+
+        /* =========================================
+           VOICE
+        ========================================= */
+
+        let hindiVoice = null;
+
+
+        function loadVoices() {
+
+            const voices =
+                window.speechSynthesis.getVoices();
+
+
+            hindiVoice =
+                voices.find(
+                    voice =>
+                        voice.lang &&
+                        voice.lang
+                            .toLowerCase()
+                            .startsWith("hi")
+                ) || null;
+        }
+
+
+        loadVoices();
+
+
+        if ("onvoiceschanged" in speechSynthesis) {
+
+            speechSynthesis.onvoiceschanged =
+                loadVoices;
+        }
+
+
+        /* =========================================
+           SPEAK
+        ========================================= */
+
+        function speakName(name) {
+
+            if (!("speechSynthesis" in window)) {
+                return;
+            }
+
+
+            speechSynthesis.cancel();
+
+
+            const utterance =
+                new SpeechSynthesisUtterance(name);
+
+
+            utterance.lang = "hi-IN";
+
+
+            if (hindiVoice) {
+
+                utterance.voice =
+                    hindiVoice;
+            }
+
+
+            utterance.rate = 0.85;
+
+            utterance.pitch = 1;
+
+            utterance.volume = 1;
+
+
+            speechSynthesis.speak(utterance);
+        }
+
+
+        /* =========================================
+           FORMAT NUMBER
+        ========================================= */
+
+        function formatNumber(number) {
+
+            return String(number)
+                .padStart(2, "0");
+        }
+
+
+        /* =========================================
+           UPDATE SCREEN
+        ========================================= */
+
+        function updateScreen() {
+
+            modiCounter.textContent =
+                formatNumber(modiVotes);
+
+
+            rahulCounter.textContent =
+                formatNumber(rahulVotes);
+
+
+            modiCrown
+                .classList
+                .remove("active");
+
+
+            rahulCrown
+                .classList
+                .remove("active");
+
+
+            if (modiVotes > rahulVotes) {
+
+                modiCrown
+                    .classList
+                    .add("active");
+
+            }
+
+
+            else if (rahulVotes > modiVotes) {
+
+                rahulCrown
+                    .classList
+                    .add("active");
+
+            }
+
+            /*
+                Equal votes =
+                दोनों crown बंद
+            */
+        }
+
+
+        /* =========================================
+           COUNTER ANIMATION
+        ========================================= */
+
+        function popCounter(element) {
+
+            element
+                .classList
+                .remove("pop");
+
+
+            void element.offsetWidth;
+
+
+            element
+                .classList
+                .add("pop");
+
+
+            setTimeout(() => {
+
+                element
+                    .classList
+                    .remove("pop");
+
+            }, 120);
+        }
+
+
+        /* =========================================
+           FULLSCREEN
+        ========================================= */
+
+        async function enterFullscreen() {
+
+            if (fullscreenStarted) {
+                return;
+            }
+
+
+            fullscreenStarted = true;
+
+
+            if (document.fullscreenElement) {
+                return;
+            }
+
+
+            try {
+
+                if (
+                    document.documentElement
+                        .requestFullscreen
+                ) {
+
+                    await document.documentElement
+                        .requestFullscreen();
+                }
+
+            }
+
+            catch (error) {
+
+                console.log(
+                    "Fullscreen request:",
+                    error
+                );
+
+            }
+        }
+
+
+        /* =========================================
+           LANDSCAPE LOCK
+        ========================================= */
+
+        async function lockLandscape() {
+
+            try {
+
+                if (
+                    screen.orientation &&
+                    screen.orientation.lock
+                ) {
+
+                    await screen.orientation
+                        .lock("landscape");
+                }
+
+            }
+
+            catch (error) {
+
+                /*
+                    Normal Chrome tabs can reject
+                    orientation locking.
+
+                    Layout itself still works
+                    correctly after rotation.
+                */
+            }
+        }
+
+
+        /* =========================================
+           FIRST TAP
+           FULLSCREEN + VOTE
+        ========================================= */
+
+        async function startDisplayMode() {
+
+            await enterFullscreen();
+
+            await lockLandscape();
+        }
+
+
+        /* =========================================
+           MODI CLICK
+        ========================================= */
+
+        modiSide.addEventListener(
+            "click",
+            async function () {
+
+                await startDisplayMode();
+
+
+                modiVotes++;
+
+
+                updateScreen();
+
+
+                popCounter(modiCounter);
+
+
+                speakName(
+                    "नरेंद्र मोदी"
+                );
+
+            }
+        );
+
+
+        /* =========================================
+           RAHUL CLICK
+        ========================================= */
+
+        rahulSide.addEventListener(
+            "click",
+            async function () {
+
+                await startDisplayMode();
+
+
+                rahulV
