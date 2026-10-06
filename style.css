@@ -1,12 +1,11 @@
-/* =========================================
-   RESET / BASIC
-========================================= */
+/* ==============================
+   BASIC RESET
+============================== */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
     -webkit-tap-highlight-color: transparent;
 }
 
@@ -14,581 +13,599 @@ html,
 body {
     width: 100%;
     height: 100%;
-
     overflow: hidden;
-}
-
-body {
-    font-family:
-        Arial,
-        "Noto Sans Devanagari",
-        "Nirmala UI",
-        sans-serif;
-
     background: #000;
 }
 
 
-/* =========================================
-   MAIN ARENA
-========================================= */
+/* ==============================
+   FULL SCREEN GAME AREA
+============================== */
 
-.arena {
-    position: relative;
+.game-screen {
+    position: fixed;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
 
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 
-    min-width: 320px;
-    min-height: 480px;
+    min-height: 100dvh;
+
+    display: flex;
 
     overflow: hidden;
 
-    display: flex;
+    touch-action: manipulation;
+
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 
-/* =========================================
-   CLICKABLE SIDE
-========================================= */
+/* ==============================
+   50 / 50 SIDES
+============================== */
 
 .side {
     position: relative;
 
     width: 50%;
+    flex: 0 0 50%;
+
     height: 100%;
+    min-height: 100%;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     cursor: pointer;
 
-    user-select: none;
-
-    transition:
-        filter 0.15s ease;
-}
-
-.side:hover {
-    filter: brightness(1.04);
+    touch-action: manipulation;
 }
 
 
-/* =========================================
-   LEFT — PINK
-========================================= */
+/* ==============================
+   LEFT SIDE
+============================== */
 
 .left-side {
     background:
         linear-gradient(
-            135deg,
-            #ff1b72 0%,
-            #f00067 48%,
+            180deg,
+            #ff2b7a 0%,
+            #f50068 50%,
             #df005b 100%
         );
+
+    color: white;
 }
 
 
-/* =========================================
-   RIGHT — YELLOW
-========================================= */
+/* ==============================
+   RIGHT SIDE
+============================== */
 
 .right-side {
     background:
         linear-gradient(
-            135deg,
-            #fff000 0%,
+            180deg,
+            #fff51a 0%,
             #ffe500 50%,
-            #ffc900 100%
+            #ffc400 100%
         );
+
+    color: #000;
 }
 
 
-/* =========================================
-   CENTER WHITE LINE
-========================================= */
+/* ==============================
+   CENTER DIVIDER
+============================== */
 
 .center-line {
     position: absolute;
 
     top: 0;
+    bottom: 0;
+
     left: 50%;
 
-    width: 5px;
-    height: 100%;
+    width: 3px;
 
     transform: translateX(-50%);
 
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.95);
 
     z-index: 20;
 
-    box-shadow:
-        0 0 8px rgba(255, 255, 255, 0.85);
+    pointer-events: none;
 }
 
 
-/* =========================================
+/* ==============================
    CHANNEL HEADER
-========================================= */
+============================== */
 
 .channel-header {
     position: absolute;
 
-    top: 18px;
+    top: max(10px, env(safe-area-inset-top));
+
     left: 50%;
 
     transform: translateX(-50%);
+
+    z-index: 50;
 
     display: flex;
 
     align-items: center;
+    justify-content: center;
 
-    gap: 9px;
+    gap: 10px;
 
-    padding:
-        7px 18px 7px 8px;
+    padding: 8px 16px;
 
-    border-radius: 20px;
+    border-radius: 40px;
 
-    background:
-        rgba(45, 35, 25, 0.72);
+    background: rgba(0, 0, 0, 0.72);
 
     backdrop-filter: blur(8px);
-
     -webkit-backdrop-filter: blur(8px);
 
-    z-index: 50;
-
     white-space: nowrap;
-
-    box-shadow:
-        0 5px 18px rgba(0, 0, 0, 0.22);
-}
-
-
-/* =========================================
-   CHANNEL LOGO
-========================================= */
-
-.channel-logo {
-    width: 58px;
-    height: 58px;
-
-    object-fit: contain;
-
-    border-radius: 50%;
 
     pointer-events: none;
 }
 
 
-/* =========================================
-   CHANNEL NAME
-========================================= */
-
-.channel-title {
-    color: #ffffff;
-
-    font-size:
-        clamp(
-            18px,
-            2.35vw,
-            38px
-        );
-
-    font-weight: 900;
-
-    letter-spacing: 1px;
-
-    text-shadow:
-        0 3px 5px rgba(0, 0, 0, 0.45);
-}
-
-
-/* =========================================
-   RESET BUTTON
-========================================= */
-
-.reset-button {
-    position: absolute;
-
-    top: 93px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width: 78px;
-    height: 78px;
+.channel-logo {
+    width: 48px;
+    height: 48px;
 
     border-radius: 50%;
 
-    border: 4px solid #ffffff;
+    object-fit: cover;
 
-    background:
-        radial-gradient(
-            circle,
-            #555555 0%,
-            #303030 60%,
-            #151515 100%
-        );
-
-    color: #ffffff;
-
-    font-size: 14px;
-
-    font-weight: 900;
-
-    cursor: pointer;
-
-    z-index: 60;
-
-    box-shadow:
-        0 5px 18px rgba(0, 0, 0, 0.4);
-
-    transition:
-        transform 0.15s ease,
-        filter 0.15s ease;
-}
-
-.reset-button:hover {
-    filter: brightness(1.12);
-}
-
-.reset-button:active {
-    transform:
-        translateX(-50%)
-        scale(0.90);
+    display: block;
 }
 
 
-/* =========================================
-   MAIN NAME
-========================================= */
+.channel-title {
+    color: #fff;
 
-.main-name {
-    position: absolute;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
 
-    top: 36%;
-
-    left: 0;
-
-    width: 100%;
-
-    text-align: center;
-
-    font-size:
-        clamp(
-            28px,
-            4vw,
-            68px
-        );
-
-    line-height: 1;
+    font-size: clamp(14px, 2.5vw, 24px);
 
     font-weight: 900;
 
     letter-spacing: 0.5px;
-
-    color: #ffffff;
-
-    text-shadow:
-        0 4px 7px rgba(0, 0, 0, 0.42);
-
-    z-index: 5;
-
-    pointer-events: none;
 }
 
 
-/* =========================================
-   RIGHT MAIN NAME — BLACK
-========================================= */
-
-.right-side .main-name {
-    color: #000000;
-
-    text-shadow:
-        0 2px 4px rgba(255, 255, 255, 0.25);
-}
-
-
-/* =========================================
-   SMALL NAME
-========================================= */
-
-.small-name {
-    position: absolute;
-
-    top: 44%;
-
-    left: 0;
-
-    width: 100%;
-
-    text-align: center;
-
-    font-size:
-        clamp(
-            14px,
-            1.5vw,
-            24px
-        );
-
-    line-height: 1;
-
-    font-weight: 600;
-
-    letter-spacing: 0.3px;
-
-    color:
-        rgba(255, 255, 255, 0.70);
-
-    text-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.25);
-
-    z-index: 5;
-
-    pointer-events: none;
-}
-
-
-/* =========================================
-   RIGHT SMALL NAME — DARK
-========================================= */
-
-.right-side .small-name {
-    color:
-        rgba(0, 0, 0, 0.55);
-
-    text-shadow: none;
-}
-
-
-/* =========================================
-   BIG COUNTER
-========================================= */
-
-.counter {
-    position: absolute;
-
-    top: 49%;
-
-    left: 0;
-
-    width: 100%;
-
-    text-align: center;
-
-    font-size:
-        clamp(
-            100px,
-            13vw,
-            200px
-        );
-
-    line-height: 1;
-
-    font-weight: 900;
-
-    color: #ffffff;
-
-    text-shadow:
-        0 7px 12px rgba(0, 0, 0, 0.35);
-
-    z-index: 5;
-
-    pointer-events: none;
-
-    transition:
-        transform 0.15s ease;
-}
-
-
-/* =========================================
-   RIGHT COUNTER — BLACK
-========================================= */
-
-.right-side .counter {
-    color: #000000;
-
-    text-shadow:
-        0 5px 8px rgba(255, 255, 255, 0.25);
-}
-
-
-/* =========================================
+/* ==============================
    CROWN
-========================================= */
+============================== */
 
 .crown {
     position: absolute;
 
     top: 24%;
 
-    left: 0;
+    left: 50%;
 
-    width: 100%;
+    transform:
+        translateX(-50%)
+        scale(0.7);
 
-    text-align: center;
-
-    font-size:
-        clamp(
-            45px,
-            5vw,
-            85px
-        );
-
-    line-height: 1;
-
-    z-index: 10;
+    font-size: clamp(30px, 7vw, 70px);
 
     opacity: 0;
 
-    transform:
-        scale(0.65)
-        translateY(10px);
-
-    pointer-events: none;
+    visibility: hidden;
 
     transition:
-        opacity 0.20s ease,
-        transform 0.20s ease;
+        opacity 0.2s ease,
+        transform 0.2s ease;
+
+    z-index: 10;
+
+    pointer-events: none;
 }
 
-
-/* =========================================
-   ACTIVE CROWN
-========================================= */
 
 .crown.active {
     opacity: 1;
 
+    visibility: visible;
+
     transform:
-        scale(1)
-        translateY(0);
+        translateX(-50%)
+        scale(1);
 
-    animation:
-        crownPulse 1s infinite;
+    animation: crownPulse 0.8s infinite alternate;
 }
 
-
-/* =========================================
-   VOTE ANIMATION
-========================================= */
-
-.side.vote-animation .counter {
-    animation:
-        counterPop 0.25s ease;
-}
-
-
-/* =========================================
-   COUNTER POP
-========================================= */
-
-@keyframes counterPop {
-
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.14);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-
-
-/* =========================================
-   CROWN ANIMATION
-========================================= */
 
 @keyframes crownPulse {
 
-    0% {
+    from {
         transform:
-            translateY(0)
-            scale(1);
+            translateX(-50%)
+            scale(0.95);
     }
 
-    50% {
+    to {
         transform:
-            translateY(-5px)
+            translateX(-50%)
             scale(1.08);
     }
 
-    100% {
-        transform:
-            translateY(0)
-            scale(1);
-    }
 }
 
 
-/* =========================================
-   MOBILE
-========================================= */
+/* ==============================
+   MAIN NAMES
+============================== */
 
-@media (max-width: 700px) {
+.main-name {
+    position: absolute;
+
+    top: 35%;
+
+    left: 10%;
+    right: 10%;
+
+    text-align: center;
+
+    font-family:
+        Arial,
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(22px, 4.5vw, 52px);
+
+    font-weight: 900;
+
+    line-height: 1.1;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+.left-side .main-name {
+    color: #fff;
+
+    text-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+.right-side .main-name {
+    color: #000;
+
+    text-shadow:
+        0 3px 10px rgba(255, 255, 255, 0.25);
+}
+
+
+/* ==============================
+   SMALL NAME
+============================== */
+
+.small-name {
+    position: absolute;
+
+    top: 43%;
+
+    left: 10%;
+    right: 10%;
+
+    text-align: center;
+
+    font-family:
+        Arial,
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size: clamp(14px, 2.5vw, 28px);
+
+    font-weight: 700;
+
+    opacity: 0.45;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+.left-side .small-name {
+    color: #fff;
+}
+
+
+.right-side .small-name {
+    color: #000;
+}
+
+
+/* ==============================
+   COUNTERS
+============================== */
+
+.counter {
+    position: absolute;
+
+    top: 50%;
+
+    left: 5%;
+    right: 5%;
+
+    text-align: center;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    font-size: clamp(55px, 13vw, 150px);
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: -2px;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+    transition:
+        transform 0.12s ease;
+}
+
+
+.left-side .counter {
+    color: #fff;
+
+    text-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+.right-side .counter {
+    color: #000;
+
+    text-shadow:
+        0 5px 15px rgba(255, 255, 255, 0.25);
+}
+
+
+/* Counter click animation */
+
+.counter.pop {
+    transform: scale(1.12);
+}
+
+
+/* ==============================
+   RESET BUTTON
+============================== */
+
+.reset-button {
+    position: absolute;
+
+    top: 105px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 100;
+
+    width: 76px;
+    height: 76px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background: rgba(20, 20, 20, 0.92);
+
+    color: #fff;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.35);
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+
+.reset-button:active {
+    transform:
+        translateX(-50%)
+        scale(0.92);
+}
+
+
+/* ==============================
+   FULLSCREEN BUTTON
+============================== */
+
+.fullscreen-button {
+    position: absolute;
+
+    bottom: max(14px, env(safe-area-inset-bottom));
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 100;
+
+    border: 0;
+
+    border-radius: 30px;
+
+    padding: 11px 18px;
+
+    background: rgba(0, 0, 0, 0.82);
+
+    color: #fff;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 900;
+
+    white-space: nowrap;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.3);
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+
+.fullscreen-button:active {
+    transform:
+        translateX(-50%)
+        scale(0.94);
+}
+
+
+/* ==============================
+   FULLSCREEN STATE
+============================== */
+
+:fullscreen .game-screen {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+:-webkit-full-screen .game-screen {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/* ==============================
+   MOBILE
+============================== */
+
+@media (max-width: 600px) {
 
     .channel-header {
-        top: 8px;
+        top: max(7px, env(safe-area-inset-top));
 
-        padding:
-            4px 10px 4px 5px;
+        padding: 6px 12px;
 
-        gap: 6px;
+        gap: 7px;
     }
-
 
     .channel-logo {
-        width: 42px;
-        height: 42px;
+        width: 38px;
+        height: 38px;
     }
-
 
     .channel-title {
-        font-size: 16px;
+        font-size: 13px;
     }
 
-
     .reset-button {
-        top: 65px;
+        top: 82px;
 
-        width: 58px;
-        height: 58px;
-
-        border-width: 3px;
+        width: 62px;
+        height: 62px;
 
         font-size: 10px;
     }
 
+    .fullscreen-button {
+        bottom: max(10px, env(safe-area-inset-bottom));
 
-    .main-name {
-        top: 37%;
-
-        font-size: 20px;
-    }
-
-
-    .small-name {
-        top: 44%;
+        padding: 9px 14px;
 
         font-size: 11px;
     }
 
+    .main-name {
+        top: 35%;
+
+        font-size: clamp(18px, 5vw, 32px);
+    }
+
+    .small-name {
+        top: 43%;
+
+        font-size: clamp(12px, 3vw, 20px);
+    }
 
     .counter {
-        top: 51%;
+        top: 50%;
 
-        font-size: 75px;
+        font-size: clamp(50px, 17vw, 100px);
     }
-
 
     .crown {
-        top: 27%;
+        top: 23%;
 
-        font-size: 44px;
+        font-size: clamp(28px, 10vw, 55px);
     }
+
+}
+
+
+/* ==============================
+   VERY SMALL PHONES
+============================== */
+
+@media (max-height: 600px) {
+
+    .main-name {
+        top: 34%;
+    }
+
+    .small-name {
+        top: 42%;
+    }
+
+    .counter {
+        top: 49%;
+    }
+
+    .reset-button {
+        top: 78px;
+
+        width: 58px;
+        height: 58px;
+    }
+
 }
