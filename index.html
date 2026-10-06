@@ -12,18 +12,19 @@
 
 <style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
     -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
     width:100%;
     height:100%;
     overflow:hidden;
     background:#000;
-    touch-action:manipulation;
+    touch-action:none;
     user-select:none;
     -webkit-user-select:none;
 }
@@ -38,21 +39,24 @@ body{
     inset:0;
     width:100vw;
     height:100vh;
-    width:100dvw;
     height:100dvh;
     display:flex;
     overflow:hidden;
     background:#000;
 }
 
+/* =========================
+   SIDES
+========================= */
+
 .vote-side{
     position:relative;
     width:50%;
-    flex:0 0 50%;
     height:100%;
+    flex:0 0 50%;
     overflow:hidden;
     cursor:pointer;
-    touch-action:manipulation;
+    touch-action:none;
 }
 
 .modi-side{
@@ -75,6 +79,10 @@ body{
     color:#000;
 }
 
+/* =========================
+   CENTER LINE
+========================= */
+
 .center-divider{
     position:absolute;
     top:0;
@@ -87,33 +95,41 @@ body{
     pointer-events:none;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 .channel-header{
     position:absolute;
     top:20px;
     left:50%;
     transform:translateX(-50%);
-    height:92px;
-    padding:0 30px;
+
+    height:82px;
+    padding:0 25px;
+
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:18px;
-    border-radius:60px;
+    gap:15px;
+
+    border-radius:50px;
+
     background:linear-gradient(
         100deg,
-        rgba(55,0,25,.97),
-        rgba(40,5,20,.96),
-        rgba(60,60,0,.94)
+        rgba(45,0,25,.97),
+        rgba(35,5,20,.97),
+        rgba(55,55,0,.95)
     );
+
     z-index:100;
-    white-space:nowrap;
     pointer-events:none;
+    white-space:nowrap;
 }
 
 .channel-logo{
-    width:68px;
-    height:68px;
-    flex:0 0 68px;
+    width:58px;
+    height:58px;
     border-radius:50%;
     object-fit:cover;
     display:block;
@@ -122,26 +138,35 @@ body{
 .channel-name{
     color:#fff;
     font-family:Arial,Helvetica,sans-serif;
-    font-size:30px;
-    font-weight:800;
+    font-size:27px;
+    font-weight:900;
     line-height:1;
 }
 
+/* =========================
+   RESET
+========================= */
+
 #resetButton{
     position:absolute;
-    top:150px;
+    top:125px;
     left:50%;
     transform:translateX(-50%);
-    width:112px;
-    height:112px;
-    border:none;
+
+    width:100px;
+    height:100px;
+
+    border:0;
     border-radius:50%;
+
     background:#181219;
     color:#fff;
+
     font-family:Arial,Helvetica,sans-serif;
-    font-size:21px;
+    font-size:19px;
     font-weight:900;
-    z-index:110;
+
+    z-index:200;
     cursor:pointer;
     touch-action:manipulation;
 }
@@ -150,44 +175,62 @@ body{
     transform:translateX(-50%) scale(.92);
 }
 
+/* =========================
+   NAMES
+========================= */
+
 .person-name{
     position:absolute;
-    top:34%;
-    left:4%;
-    right:4%;
+
+    top:35%;
+    left:3%;
+    right:3%;
+
     text-align:center;
-    font-family:Arial,"Noto Sans Devanagari",sans-serif;
-    font-size:clamp(30px,4.4vw,60px);
+
+    font-family:Arial,
+        "Noto Sans Devanagari",
+        sans-serif;
+
+    font-size:clamp(22px,4.5vw,58px);
     font-weight:900;
-    line-height:1.08;
+    line-height:1.1;
+
     z-index:5;
     pointer-events:none;
 }
 
 .modi-side .person-name{
     color:#fff;
-    text-shadow:0 2px 5px rgba(0,0,0,.18);
 }
 
 .rahul-side .person-name{
     color:#000;
-    text-shadow:0 2px 4px rgba(255,255,255,.12);
 }
+
+/* =========================
+   COUNTERS
+========================= */
 
 .vote-counter{
     position:absolute;
-    top:50%;
+
+    top:51%;
     left:0;
     right:0;
+
     text-align:center;
+
     font-family:Arial,Helvetica,sans-serif;
-    font-size:clamp(80px,12vw,175px);
+
+    font-size:clamp(65px,12vw,170px);
     font-weight:900;
+
     line-height:1;
-    letter-spacing:-5px;
+    letter-spacing:-4px;
+
     z-index:5;
     pointer-events:none;
-    transition:transform .12s ease;
 }
 
 .modi-side .vote-counter{
@@ -199,58 +242,90 @@ body{
 }
 
 .vote-counter.pop{
-    transform:scale(1.08);
+    animation:counterPop .15s ease;
 }
+
+@keyframes counterPop{
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.12);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* =========================
+   CROWN
+========================= */
 
 .crown{
     position:absolute;
+
     top:23%;
     left:50%;
-    transform:translateX(-50%) scale(.75);
+
+    transform:translateX(-50%) scale(.7);
+
     font-size:clamp(35px,6vw,75px);
+
     opacity:0;
     visibility:hidden;
+
     z-index:8;
     pointer-events:none;
-    transition:opacity .15s ease,transform .15s ease;
+
+    transition:
+        opacity .15s ease,
+        transform .15s ease;
 }
 
 .crown.active{
     opacity:1;
     visibility:visible;
-    transform:translateX(-50%) scale(1);
+
+    transform:
+        translateX(-50%)
+        scale(1);
 }
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
     .channel-header{
-        top:12px;
-        height:62px;
-        padding:0 17px;
-        gap:10px;
-        border-radius:40px;
+        top:10px;
+        height:58px;
+        padding:0 15px;
+        gap:9px;
+        border-radius:35px;
     }
 
     .channel-logo{
-        width:44px;
-        height:44px;
-        flex-basis:44px;
+        width:42px;
+        height:42px;
     }
 
     .channel-name{
-        font-size:17px;
+        font-size:16px;
     }
 
     #resetButton{
-        top:88px;
-        width:68px;
-        height:68px;
-        font-size:13px;
+        top:78px;
+        width:64px;
+        height:64px;
+        font-size:12px;
     }
 
     .person-name{
         top:35%;
-        font-size:clamp(20px,5.5vw,35px);
+        font-size:clamp(19px,5.5vw,34px);
     }
 
     .vote-counter{
@@ -260,75 +335,53 @@ body{
     }
 
     .crown{
-        top:23%;
-        font-size:42px;
+        top:22%;
+        font-size:40px;
     }
 }
+
+/* =========================
+   LANDSCAPE MOBILE
+========================= */
 
 @media(orientation:landscape) and (max-height:600px){
 
     .channel-header{
-        top:8px;
-        height:55px;
-        padding:0 18px;
-        gap:10px;
+        top:7px;
+        height:52px;
+        padding:0 15px;
+        gap:8px;
     }
 
     .channel-logo{
-        width:40px;
-        height:40px;
-        flex-basis:40px;
+        width:38px;
+        height:38px;
     }
 
     .channel-name{
-        font-size:16px;
+        font-size:15px;
     }
 
     #resetButton{
-        top:70px;
-        width:58px;
-        height:58px;
-        font-size:11px;
+        top:64px;
+        width:55px;
+        height:55px;
+        font-size:10px;
     }
 
     .person-name{
         top:34%;
-        font-size:clamp(24px,4.5vw,48px);
+        font-size:clamp(22px,4.5vw,46px);
     }
 
     .vote-counter{
         top:49%;
-        font-size:clamp(65px,12vw,130px);
+        font-size:clamp(60px,12vw,125px);
     }
 
     .crown{
-        top:20%;
-        font-size:42px;
-    }
-}
-
-@media(orientation:landscape) and (max-height:450px){
-
-    .channel-header{
-        top:5px;
-        height:48px;
-    }
-
-    .channel-logo{
-        width:35px;
-        height:35px;
-        flex-basis:35px;
-    }
-
-    .channel-name{
-        font-size:14px;
-    }
-
-    #resetButton{
-        top:58px;
-        width:52px;
-        height:52px;
-        font-size:10px;
+        top:19%;
+        font-size:40px;
     }
 }
 </style>
@@ -338,38 +391,62 @@ body{
 
 <div id="arena">
 
-    <section id="modiSide" class="vote-side modi-side">
+    <!-- LEFT SIDE -->
 
-        <div id="modiCrown" class="crown">👑</div>
+    <section
+        id="modiSide"
+        class="vote-side modi-side"
+    >
+
+        <div id="modiCrown" class="crown">
+            👑
+        </div>
 
         <div class="person-name">
             नरेंद्र मोदी
         </div>
 
-        <div id="modiCounter" class="vote-counter">
+        <div
+            id="modiCounter"
+            class="vote-counter"
+        >
             00
         </div>
 
     </section>
 
 
-    <section id="rahulSide" class="vote-side rahul-side">
+    <!-- RIGHT SIDE -->
 
-        <div id="rahulCrown" class="crown">👑</div>
+    <section
+        id="rahulSide"
+        class="vote-side rahul-side"
+    >
+
+        <div id="rahulCrown" class="crown">
+            👑
+        </div>
 
         <div class="person-name">
             राहुल गांधी
         </div>
 
-        <div id="rahulCounter" class="vote-counter">
+        <div
+            id="rahulCounter"
+            class="vote-counter"
+        >
             00
         </div>
 
     </section>
 
 
+    <!-- CENTER -->
+
     <div class="center-divider"></div>
 
+
+    <!-- CHANNEL -->
 
     <div class="channel-header">
 
@@ -386,7 +463,12 @@ body{
     </div>
 
 
-    <button id="resetButton" type="button">
+    <!-- ONLY BUTTON -->
+
+    <button
+        id="resetButton"
+        type="button"
+    >
         RESET
     </button>
 
@@ -395,33 +477,43 @@ body{
 
 <script>
 
-/* ===============================
-   VOTE VARIABLES
-================================ */
+/* =====================================
+   VOTE COUNTERS
+===================================== */
 
 let modiVotes = 0;
 let rahulVotes = 0;
 
 
-/* ===============================
-   ELEMENTS
-================================ */
+/* =====================================
+   GET ELEMENTS
+===================================== */
 
-const modiSide = document.getElementById("modiSide");
-const rahulSide = document.getElementById("rahulSide");
+const modiSide =
+    document.getElementById("modiSide");
 
-const modiCounter = document.getElementById("modiCounter");
-const rahulCounter = document.getElementById("rahulCounter");
+const rahulSide =
+    document.getElementById("rahulSide");
 
-const modiCrown = document.getElementById("modiCrown");
-const rahulCrown = document.getElementById("rahulCrown");
+const modiCounter =
+    document.getElementById("modiCounter");
 
-const resetButton = document.getElementById("resetButton");
+const rahulCounter =
+    document.getElementById("rahulCounter");
+
+const modiCrown =
+    document.getElementById("modiCrown");
+
+const rahulCrown =
+    document.getElementById("rahulCrown");
+
+const resetButton =
+    document.getElementById("resetButton");
 
 
-/* ===============================
-   NUMBER FORMAT
-================================ */
+/* =====================================
+   FORMAT NUMBER
+===================================== */
 
 function formatNumber(number){
 
@@ -430,15 +522,17 @@ function formatNumber(number){
 }
 
 
-/* ===============================
+/* =====================================
    UPDATE SCREEN
-================================ */
+===================================== */
 
 function updateScreen(){
 
-    modiCounter.textContent = formatNumber(modiVotes);
+    modiCounter.textContent =
+        formatNumber(modiVotes);
 
-    rahulCounter.textContent = formatNumber(rahulVotes);
+    rahulCounter.textContent =
+        formatNumber(rahulVotes);
 
 
     modiCrown.classList.remove("active");
@@ -451,7 +545,7 @@ function updateScreen(){
 
     }
 
-    else if(rahulVotes > modiVotes){
+    if(rahulVotes > modiVotes){
 
         rahulCrown.classList.add("active");
 
@@ -460,11 +554,11 @@ function updateScreen(){
 }
 
 
-/* ===============================
+/* =====================================
    COUNTER ANIMATION
-================================ */
+===================================== */
 
-function popCounter(element){
+function animateCounter(element){
 
     element.classList.remove("pop");
 
@@ -472,86 +566,57 @@ function popCounter(element){
 
     element.classList.add("pop");
 
-    setTimeout(function(){
-
-        element.classList.remove("pop");
-
-    },120);
-
 }
 
 
-/* ===============================
-   HINDI VOICE
-================================ */
+/* =====================================
+   SPEECH
+===================================== */
 
-let hindiVoice = null;
-
-function loadVoices(){
+function speakHindi(text){
 
     if(!("speechSynthesis" in window)){
-        return;
-    }
-
-    const voices = speechSynthesis.getVoices();
-
-    hindiVoice = voices.find(function(voice){
-
-        return voice.lang &&
-               voice.lang.toLowerCase().startsWith("hi");
-
-    }) || null;
-
-}
-
-loadVoices();
-
-if("speechSynthesis" in window){
-
-    speechSynthesis.onvoiceschanged = loadVoices;
-
-}
-
-
-function speakName(name){
-
-    if(!("speechSynthesis" in window)){
-        return;
-    }
-
-    speechSynthesis.cancel();
-
-    const utterance =
-        new SpeechSynthesisUtterance(name);
-
-    utterance.lang = "hi-IN";
-
-    if(hindiVoice){
-        utterance.voice = hindiVoice;
-    }
-
-    utterance.rate = 0.85;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-
-    speechSynthesis.speak(utterance);
-
-}
-
-
-/* ===============================
-   FULLSCREEN
-================================ */
-
-async function enterFullscreen(){
-
-    if(document.fullscreenElement){
         return;
     }
 
     try{
 
-        if(document.documentElement.requestFullscreen){
+        window.speechSynthesis.cancel();
+
+        const speech =
+            new SpeechSynthesisUtterance(text);
+
+        speech.lang = "hi-IN";
+        speech.rate = 0.9;
+        speech.pitch = 1;
+        speech.volume = 1;
+
+        window.speechSynthesis.speak(speech);
+
+    }catch(error){
+
+        console.log(
+            "Speech error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================
+   FULLSCREEN
+===================================== */
+
+async function tryFullscreen(){
+
+    try{
+
+        if(
+            !document.fullscreenElement &&
+            document.documentElement.requestFullscreen
+        ){
 
             await document.documentElement.requestFullscreen();
 
@@ -559,173 +624,142 @@ async function enterFullscreen(){
 
     }catch(error){
 
-        console.log("Fullscreen unavailable:",error);
+        console.log(
+            "Fullscreen:",
+            error
+        );
 
     }
 
 }
 
 
-/* ===============================
-   LANDSCAPE
-================================ */
+/* =====================================
+   MODI VOTE
+===================================== */
 
-async function lockLandscape(){
+function addModiVote(){
 
-    try{
+    modiVotes =
+        modiVotes + 1;
 
-        if(
-            screen.orientation &&
-            screen.orientation.lock
-        ){
+    updateScreen();
 
-            await screen.orientation.lock("landscape");
+    animateCounter(
+        modiCounter
+    );
+
+    speakHindi(
+        "नरेंद्र मोदी"
+    );
+
+    tryFullscreen();
+
+}
+
+
+/* =====================================
+   RAHUL VOTE
+===================================== */
+
+function addRahulVote(){
+
+    rahulVotes =
+        rahulVotes + 1;
+
+    updateScreen();
+
+    animateCounter(
+        rahulCounter
+    );
+
+    speakHindi(
+        "राहुल गांधी"
+    );
+
+    tryFullscreen();
+
+}
+
+
+/* =====================================
+   IMPORTANT:
+   ONE POINTER EVENT ONLY
+===================================== */
+
+modiSide.addEventListener(
+    "pointerup",
+    function(event){
+
+        if(event.button !== undefined &&
+           event.button !== 0){
+
+            return;
 
         }
 
-    }catch(error){
+        addModiVote();
 
-        console.log("Landscape lock unavailable:",error);
-
+    },
+    {
+        passive:true
     }
-
-}
-
-
-/* ===============================
-   DISPLAY MODE
-================================ */
-
-async function startDisplayMode(){
-
-    await enterFullscreen();
-
-    await lockLandscape();
-
-}
+);
 
 
-/* ===============================
-   MODI TAP
-================================ */
+rahulSide.addEventListener(
+    "pointerup",
+    function(event){
 
-function voteModi(event){
+        if(event.button !== undefined &&
+           event.button !== 0){
 
-    event.preventDefault();
+            return;
 
-    modiVotes++;
+        }
 
-    updateScreen();
+        addRahulVote();
 
-    popCounter(modiCounter);
-
-    speakName("नरेंद्र मोदी");
-
-    startDisplayMode();
-
-}
-
-
-/* ===============================
-   RAHUL TAP
-================================ */
-
-function voteRahul(event){
-
-    event.preventDefault();
-
-    rahulVotes++;
-
-    updateScreen();
-
-    popCounter(rahulCounter);
-
-    speakName("राहुल गांधी");
-
-    startDisplayMode();
-
-}
+    },
+    {
+        passive:true
+    }
+);
 
 
-/* ===============================
-   CLICK EVENTS
-================================ */
-
-modiSide.addEventListener("click",voteModi);
-
-rahulSide.addEventListener("click",voteRahul);
-
-
-/* ===============================
-   TOUCH EVENTS
-================================ */
-
-modiSide.addEventListener("touchend",function(event){
-
-    event.preventDefault();
-
-    voteModi(event);
-
-},{passive:false});
-
-
-rahulSide.addEventListener("touchend",function(event){
-
-    event.preventDefault();
-
-    voteRahul(event);
-
-},{passive:false});
-
-
-/* ===============================
+/* =====================================
    RESET
-================================ */
+===================================== */
 
-resetButton.addEventListener("click",function(event){
+resetButton.addEventListener(
+    "pointerup",
+    function(event){
 
-    event.preventDefault();
+        event.stopPropagation();
 
-    event.stopPropagation();
+        modiVotes = 0;
+        rahulVotes = 0;
 
-    modiVotes = 0;
-    rahulVotes = 0;
+        updateScreen();
 
-    updateScreen();
+        if("speechSynthesis" in window){
 
-    if("speechSynthesis" in window){
+            window.speechSynthesis.cancel();
 
-        speechSynthesis.cancel();
+        }
 
+    },
+    {
+        passive:true
     }
+);
 
-});
 
-
-/* ===============================
-   INITIAL STATE
-================================ */
+/* =====================================
+   START
+===================================== */
 
 updateScreen();
-
-
-/* ===============================
-   RESIZE / ROTATION
-================================ */
-
-window.addEventListener("resize",function(){
-
-    requestAnimationFrame(function(){
-
-        document.getElementById("arena").style.width =
-            window.innerWidth + "px";
-
-        document.getElementById("arena").style.height =
-            window.innerHeight + "px";
-
-    });
-
-});
 
 </script>
 
