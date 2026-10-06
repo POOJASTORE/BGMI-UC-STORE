@@ -1,489 +1,325 @@
-"use strict";
-
-
 /* =========================================
+   GOAT ARENA LIVE
+   ========================================= */
+
+
+/* ==============================
    VOTE COUNTERS
-========================================= */
+============================== */
 
 let modiVotes = 0;
 let rahulVotes = 0;
 
 
-/* =========================================
-   HTML ELEMENTS
-========================================= */
+/* ==============================
+   ELEMENTS
+============================== */
 
-const modiSide =
-    document.getElementById("modiSide");
+const modiSide = document.getElementById("modiSide");
+const rahulSide = document.getElementById("rahulSide");
 
-const rahulSide =
-    document.getElementById("rahulSide");
+const modiCounter = document.getElementById("modiCounter");
+const rahulCounter = document.getElementById("rahulCounter");
 
+const modiCrown = document.getElementById("modiCrown");
+const rahulCrown = document.getElementById("rahulCrown");
 
-const modiCounter =
-    document.getElementById("modiCounter");
-
-const rahulCounter =
-    document.getElementById("rahulCounter");
-
-
-const modiCrown =
-    document.getElementById("modiCrown");
-
-const rahulCrown =
-    document.getElementById("rahulCrown");
+const resetButton = document.getElementById("resetButton");
+const fullscreenButton = document.getElementById("fullscreenButton");
 
 
-const resetButton =
-    document.getElementById("resetButton");
+/* ==============================
+   SPEECH
+============================== */
+
+const speech = window.speechSynthesis;
+
+let hindiVoice = null;
 
 
-/* =========================================
-   BROWSER VOICE
-========================================= */
+function loadHindiVoice() {
 
-const speech =
-    window.speechSynthesis;
+    const voices = speech.getVoices();
 
-
-/* =========================================
-   AVAILABLE VOICES
-========================================= */
-
-let availableVoices = [];
-
-
-function loadVoices() {
-
-    if (!speech) {
-        return;
-    }
-
-    availableVoices =
-        speech.getVoices();
+    hindiVoice =
+        voices.find(
+            voice =>
+                voice.lang &&
+                voice.lang.toLowerCase().startsWith("hi")
+        ) || null;
 }
 
 
-loadVoices();
+loadHindiVoice();
 
 
-if (
-    speech &&
-    "onvoiceschanged" in speech
-) {
-    speech.onvoiceschanged =
-        loadVoices;
+if ("onvoiceschanged" in speech) {
+    speech.onvoiceschanged = loadHindiVoice;
 }
 
 
-/* =========================================
-   FIND HINDI VOICE
-========================================= */
-
-function getHindiVoice() {
-
-    if (!speech) {
-        return null;
-    }
-
-
-    if (!availableVoices.length) {
-        availableVoices =
-            speech.getVoices();
-    }
-
-
-    /*
-       पहले Hindi voice खोजेंगे.
-    */
-
-    let voice =
-        availableVoices.find(
-            function (item) {
-
-                return (
-                    item.lang &&
-                    item.lang.toLowerCase()
-                        .startsWith("hi")
-                );
-
-            }
-        );
-
-
-    /*
-       Hindi voice नहीं मिली तो
-       कोई Indian English voice.
-    */
-
-    if (!voice) {
-
-        voice =
-            availableVoices.find(
-                function (item) {
-
-                    return (
-                        item.lang === "en-IN"
-                    );
-
-                }
-            );
-
-    }
-
-
-    return voice || null;
-}
-
-
-/* =========================================
+/* ==============================
    SPEAK NAME
-========================================= */
+============================== */
 
 function speakName(name) {
 
-    if (!speech) {
+    if (!("speechSynthesis" in window)) {
         return;
     }
 
-
-    /*
-       पहले पिछली आवाज रोकें.
-    */
-
     speech.cancel();
 
-
-    /*
-       नई आवाज बनाएं.
-    */
-
     const utterance =
-        new SpeechSynthesisUtterance(
-            name
-        );
-
-
-    /*
-       Hindi language.
-    */
+        new SpeechSynthesisUtterance(name);
 
     utterance.lang = "hi-IN";
 
-
-    /*
-       Hindi voice available हो
-       तो उसे use करें.
-    */
-
-    const voice =
-        getHindiVoice();
-
-
-    if (voice) {
-
-        utterance.voice =
-            voice;
-
+    if (hindiVoice) {
+        utterance.voice = hindiVoice;
     }
 
-
-    /*
-       Voice settings.
-    */
-
     utterance.rate = 0.85;
-
     utterance.pitch = 1;
-
     utterance.volume = 1;
 
-
-    /*
-       बोलें.
-    */
-
-    speech.speak(
-        utterance
-    );
+    speech.speak(utterance);
 }
 
 
-/* =========================================
+/* ==============================
    NUMBER FORMAT
-========================================= */
+============================== */
 
 function formatNumber(number) {
 
-    return String(number)
-        .padStart(2, "0");
+    return String(number).padStart(2, "0");
+
 }
 
 
-/* =========================================
+/* ==============================
    UPDATE COUNTERS
-========================================= */
+============================== */
 
 function updateCounters() {
 
     modiCounter.textContent =
-        formatNumber(
-            modiVotes
-        );
-
+        formatNumber(modiVotes);
 
     rahulCounter.textContent =
-        formatNumber(
-            rahulVotes
-        );
+        formatNumber(rahulVotes);
+
 }
 
 
-/* =========================================
-   CROWN SYSTEM
-========================================= */
+/* ==============================
+   UPDATE CROWN
+============================== */
 
 function updateCrown() {
 
-    /*
-       सबसे पहले दोनों crown हटाओ.
-       इससे बराबर होने पर
-       दोनों crown automatically हटेंगे.
-    */
-
-    modiCrown.classList.remove(
-        "active"
-    );
-
-    rahulCrown.classList.remove(
-        "active"
-    );
+    modiCrown.classList.remove("active");
+    rahulCrown.classList.remove("active");
 
 
-    /*
-       मोदी के votes ज्यादा.
-    */
+    if (modiVotes > rahulVotes) {
 
-    if (
-        modiVotes >
-        rahulVotes
-    ) {
+        modiCrown.classList.add("active");
 
-        modiCrown.classList.add(
-            "active"
-        );
-
-        return;
     }
 
+    else if (rahulVotes > modiVotes) {
 
-    /*
-       राहुल के votes ज्यादा.
-    */
+        rahulCrown.classList.add("active");
 
-    if (
-        rahulVotes >
-        modiVotes
-    ) {
-
-        rahulCrown.classList.add(
-            "active"
-        );
-
-        return;
     }
 
+    // बराबर होने पर दोनों crown hidden रहेंगे
 
-    /*
-       अगर दोनों बराबर हैं,
-       तो कोई crown नहीं.
-    */
 }
 
 
-/* =========================================
-   UPDATE COMPLETE SCREEN
-========================================= */
+/* ==============================
+   COUNTER ANIMATION
+============================== */
+
+function animateCounter(element) {
+
+    element.classList.remove("pop");
+
+    void element.offsetWidth;
+
+    element.classList.add("pop");
+
+    setTimeout(() => {
+
+        element.classList.remove("pop");
+
+    }, 140);
+
+}
+
+
+/* ==============================
+   UPDATE SCREEN
+============================== */
 
 function updateScreen() {
 
     updateCounters();
 
     updateCrown();
+
 }
 
 
-/* =========================================
-   CLICK ANIMATION
-========================================= */
-
-function animateVote(element) {
-
-    element.classList.remove(
-        "vote-animation"
-    );
-
-
-    /*
-       Animation restart.
-    */
-
-    void element.offsetWidth;
-
-
-    element.classList.add(
-        "vote-animation"
-    );
-
-
-    setTimeout(
-        function () {
-
-            element.classList.remove(
-                "vote-animation"
-            );
-
-        },
-        300
-    );
-}
-
-
-/* =========================================
+/* ==============================
    MODI CLICK
-========================================= */
+============================== */
 
-modiSide.addEventListener(
-    "click",
-    function () {
+modiSide.addEventListener("click", function () {
 
-        /*
-           मोदी को +1.
-        */
+    modiVotes++;
 
-        modiVotes++;
+    updateScreen();
 
+    animateCounter(modiCounter);
 
-        /*
-           Counter और crown update.
-        */
+    speakName("नरेंद्र मोदी");
 
-        updateScreen();
+});
 
 
-        /*
-           Click animation.
-        */
-
-        animateVote(
-            modiSide
-        );
-
-
-        /*
-           आवाज:
-           नरेंद्र मोदी
-        */
-
-        speakName(
-            "नरेंद्र मोदी"
-        );
-
-    }
-);
-
-
-/* =========================================
+/* ==============================
    RAHUL CLICK
-========================================= */
+============================== */
 
-rahulSide.addEventListener(
-    "click",
-    function () {
+rahulSide.addEventListener("click", function () {
 
-        /*
-           राहुल को +1.
-        */
+    rahulVotes++;
 
-        rahulVotes++;
+    updateScreen();
 
+    animateCounter(rahulCounter);
 
-        /*
-           Counter और crown update.
-        */
+    speakName("राहुल गांधी");
 
-        updateScreen();
+});
 
 
-        /*
-           Click animation.
-        */
+/* ==============================
+   RESET
+============================== */
 
-        animateVote(
-            rahulSide
-        );
+resetButton.addEventListener("click", function (event) {
 
+    event.stopPropagation();
 
-        /*
-           आवाज:
-           राहुल गांधी
-        */
+    modiVotes = 0;
+    rahulVotes = 0;
 
-        speakName(
-            "राहुल गांधी"
-        );
+    speech.cancel();
 
-    }
-);
+    updateScreen();
+
+});
 
 
-/* =========================================
-   RESET BUTTON
-========================================= */
+/* ==============================
+   FULLSCREEN
+============================== */
 
-resetButton.addEventListener(
-    "click",
-    function (event) {
+async function enterFullscreen() {
 
-        /*
-           Reset को vote नहीं बनने देना.
-        */
-
-        event.stopPropagation();
+    const element = document.documentElement;
 
 
-        /*
-           दोनों counters zero.
-        */
+    try {
 
-        modiVotes = 0;
+        if (document.fullscreenElement) {
 
-        rahulVotes = 0;
+            await document.exitFullscreen();
 
-
-        /*
-           चल रही आवाज बंद.
-        */
-
-        if (speech) {
-
-            speech.cancel();
+            return;
 
         }
 
 
-        /*
-           Screen वापस initial state.
-        */
+        if (element.requestFullscreen) {
 
-        updateScreen();
+            await element.requestFullscreen();
+
+        }
+
+        else if (element.webkitRequestFullscreen) {
+
+            element.webkitRequestFullscreen();
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Fullscreen request failed:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ==============================
+   FULLSCREEN BUTTON
+============================== */
+
+fullscreenButton.addEventListener(
+    "click",
+    function (event) {
+
+        event.stopPropagation();
+
+        enterFullscreen();
 
     }
 );
 
 
-/* =========================================
+/* ==============================
+   UPDATE BUTTON TEXT
+============================== */
+
+function updateFullscreenButton() {
+
+    if (document.fullscreenElement) {
+
+        fullscreenButton.textContent =
+            "⛶ EXIT FULL SCREEN";
+
+    }
+
+    else {
+
+        fullscreenButton.textContent =
+            "⛶ FULL SCREEN";
+
+    }
+
+}
+
+
+document.addEventListener(
+    "fullscreenchange",
+    updateFullscreenButton
+);
+
+
+/* ==============================
    INITIAL SCREEN
-========================================= */
+============================== */
 
 updateScreen();
+updateFullscreenButton();
