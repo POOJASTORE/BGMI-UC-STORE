@@ -3,84 +3,113 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    >
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1,
+                   maximum-scale=1,
+                   user-scalable=no,
+                   viewport-fit=cover">
 
     <meta name="theme-color" content="#000000">
 
+    <!-- Android PWA -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
+
     <title>GOAT ARENA LIVE</title>
+
+    <link rel="manifest" href="manifest.json">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <main id="gameScreen" class="game-screen">
+<div id="arena">
 
-        <!-- LEFT: NARENDRA MODI -->
-        <section id="modiSide" class="side left-side">
+    <!-- ================= LEFT ================= -->
 
-            <div id="modiCrown" class="crown">👑</div>
+    <section id="modiSide"
+             class="vote-side modi-side">
 
-            <div class="main-name">नरेंद्र मोदी</div>
-
-            <div class="small-name">नरेंद्र मोदी</div>
-
-            <div id="modiCounter" class="counter">00</div>
-
-        </section>
-
-
-        <!-- RIGHT: RAHUL GANDHI -->
-        <section id="rahulSide" class="side right-side">
-
-            <div id="rahulCrown" class="crown">👑</div>
-
-            <div class="main-name">राहुल गांधी</div>
-
-            <div class="small-name">राहुल गांधी</div>
-
-            <div id="rahulCounter" class="counter">00</div>
-
-        </section>
-
-
-        <!-- CENTER LINE -->
-        <div class="center-line"></div>
-
-
-        <!-- CHANNEL HEADER -->
-        <div class="channel-header">
-
-            <img
-                src="logo.png"
-                class="channel-logo"
-                alt="GOAT ARENA LIVE"
-            >
-
-            <div class="channel-title">
-                GOAT ARENA LIVE
-            </div>
-
+        <div id="modiCrown"
+             class="crown">
+            👑
         </div>
 
+        <div class="person-name">
+            नरेंद्र मोदी
+        </div>
 
-        <!-- RESET -->
-        <button id="resetButton" class="reset-button">
-            RESET
-        </button>
+        <div id="modiCounter"
+             class="vote-counter">
+            00
+        </div>
+
+    </section>
 
 
-        <!-- FULLSCREEN -->
-        <button id="fullscreenButton" class="fullscreen-button">
-            ⛶ FULL SCREEN
-        </button>
+    <!-- ================= RIGHT ================= -->
 
-    </main>
+    <section id="rahulSide"
+             class="vote-side rahul-side">
 
-    <script src="script.js"></script>
+        <div id="rahulCrown"
+             class="crown">
+            👑
+        </div>
+
+        <div class="person-name">
+            राहुल गांधी
+        </div>
+
+        <div id="rahulCounter"
+             class="vote-counter">
+            00
+        </div>
+
+    </section>
+
+
+    <!-- CENTER LINE -->
+
+    <div class="center-divider"></div>
+
+
+    <!-- ================= CHANNEL HEADER ================= -->
+
+    <div class="channel-header">
+
+        <img
+            src="logo.png"
+            class="channel-logo"
+            alt="GOAT ARENA LIVE"
+        >
+
+        <div class="channel-name">
+            GOAT ARENA LIVE
+        </div>
+
+    </div>
+
+
+    <!-- ================= RESET ================= -->
+
+    <button
+        id="resetButton"
+        class="reset-button"
+        type="button">
+
+        RESET
+
+    </button>
+
+</div>
+
+
+<script src="script.js"></script>
 
 </body>
 </html>
